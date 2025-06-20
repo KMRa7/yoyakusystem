@@ -740,206 +740,104 @@
         <div class="label" id="course">メニューをお選びください<span class="required">必須</span></div>
         <div class="info-text">※メニューを選択すると<br>空き状況のカレンダーが表示されます</div>
         <div class="menu-sections">
-            <button type="button" onclick="showMenu('male')">タイ古式</button>
-            <button type="button" onclick="showMenu('female')">フェイシャル</button>
-            <button type="button" onclick="showMenu('whitening')">フットケア</button>
-            <button type="button" onclick="showMenu('headsholder')">頭・肩集中ほぐし</button>
-            <button type="button" onclick="showMenu('lightfire')">光燃焼ボディーサポート</button>
-            <button type="button" onclick="showMenu('braintherapy')">ブレインセラピー</button>
-            <button type="button" onclick="showMenu('EMMpulse')">EMM特殊電子パルス照射</button>
-            <button type="button" onclick="showMenu('healthcheck')">健康チェックTシステム</button>
-            <button type="button" onclick="showMenu('dreyes')">Drアイズ</button>
-            <button type="button" onclick="showMenu('drprazuma')">Drプラズマ</button>
-            <button type="button" onclick="showMenu('hydrogen')">水素吸入</button>
-            <button type="button" onclick="showMenu('oxygen')">酸素吸入</button>
+            <button type="button" onclick="showMenu('male')">ブライダルコース</button>
+            <button type="button" onclick="showMenu('female')">シェービングコース</button>
+            <button type="button" onclick="showMenu('whitening')">マッサージコース</button>
         </div>
 
         <div id="treatment-text" style="display: none; margin-bottom: 10px;"></div>
 
         <div id="male" class="menu-section">
             <div class="highlight-background">
-                <span class="highlight-text">◆タイ古式◆</span>
+                <span class="highlight-text">◆ブライダルコース◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment1')" data-price="5800">タイ古式 60分</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment2')" data-price="7800">タイ古式 90分</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment3')" data-price="12000">タイ古式+EMM基本コース 90分</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment1')" data-price="15000">和装プラン〈30分〉</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment2')"
+                    data-price="15000">洋装プランA〈60分〉</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment3')"
+                    data-price="15000">洋装プランB〈120分〉</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment4')"
+                    data-price="15000">洋装プランC〈30分〉</button>
             </div>
             <div class="highlight-background">
-                <span class="highlight-text">タイ古式：オプション</span>
+                <span class="highlight-text">ブライダルコース：オプション</span>
             </div>
             <div class="irradiations">
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)"
-                    data-price="1200">首リンパ</button>
+                    data-price="15000">眉カット〈30分〉</button>
                 <button type="button" id="secondirradiations" onclick="selectirradiations(this)"
-                    data-price="1000">頭皮ほぐし</button>
+                    data-price="15000">ベーシックマッサージ〈30分〉</button>
+                <button type="button" id="thirdirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">リラックスマッサージ〈30分〉</button>
             </div>
         </div>
 
         <div id="female" class="menu-section">
             <div class="highlight-background">
-                <span class="highlight-text">◆フェイシャル◆</span>
+                <span class="highlight-text">◆シェービングコース◆</span>
             </div>
             <div class="symptoms">
                 <button type="button" onclick="selectSymptom(this, 'treatment5')"
-                    data-price="5800">ベーシックフェイシャル 60分</button>
+                    data-price="15000">リラックスコース〈60分〉</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment6')"
+                    data-price="15000">ベーシックコース〈30分〉</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment7')"
+                    data-price="15000">スピードコース〈90分〉</button>
             </div>
             <div class="highlight-background">
-                <span class="highlight-text">フェイシャル：オプション</span>
+                <span class="highlight-text">シェービングコース：オプション</span>
             </div>
             <div class="irradiations">
                 <button type="button" id="fourthirradiations" onclick="selectirradiations(this)"
-                    data-price="1200">首リンパ</button>
+                    data-price="15000">眉カット〈30分〉</button>
                 <button type="button" id="fifthirradiations" onclick="selectirradiations(this)"
-                    data-price="1000">頭皮ほぐし</button>
+                    data-price="15000">襟足〈30分〉</button>
                 <button type="button" id="sixthirradiations" onclick="selectirradiations(this)"
-                    data-price="500">足浴</button>
+                    data-price="15000">背中</button>
+                <button type="button" id="seventhirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">背中(腰まで)〈30分〉</button>
+                <button type="button" id="eighthirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">デコルテ〈30分〉</button>
+                <button type="button" id="ninthirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">腕〈30分〉</button>
+                <button type="button" id="tenthirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">保湿パック〈30分〉</button>
+                <button type="button" id="eleventhirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">美白パック〈30分〉</button>
             </div>
         </div>
 
         <div id="whitening" class="menu-section">
             <div class="highlight-background">
-                <span class="highlight-text">◆フットケア◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment6')"
-                    data-price="15000">フットケア 60分</button>
-            </div>
-            <div class="highlight-background">
-                <span class="highlight-text">フットケア：オプション</span>
-            </div>
-            <div class="irradiations">
-                <button type="button" id="twelvethirradiations" onclick="selectirradiations(this)"
-                    data-price="1200">首リンパ</button>
-                <button type="button" id="thirteenthirradiations" onclick="selectirradiations(this)"
-                    data-price="1000">頭皮ほぐし</button>
-            </div>
-        </div>
-
-        <div id="headsholder" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆頭・肩集中ほぐし◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment7')"
-                    data-price="5800">肩集中ほぐし 60分</button>
-            </div>
-            <div class="highlight-background">
-                <span class="highlight-text">頭・肩集中ほぐし：オプション</span>
-            </div>
-            <div class="irradiations">
-                <button type="button" id="fourteenthirradiations" onclick="selectirradiations(this)"
-                    data-price="1200">首リンパ</button>
-                <button type="button" id="fifteenthirradiations" onclick="selectirradiations(this)"
-                    data-price="1000">頭皮ほぐし</button>
-                <button type="button" id="sixteenthirradiations" onclick="selectirradiations(this)"
-                    data-price="500">足浴</button>
-            </div>
-        </div>
-
-        <div id="lightfire" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆光燃焼ボディーサポート◆</span>
+                <span class="highlight-text">◆マッサージコース◆</span>
             </div>
             <div class="symptoms">
                 <button type="button" onclick="selectSymptom(this, 'treatment8')"
-                    data-price="5800">肩集中ほぐし 60分</button>
-            </div>
-            <div class="highlight-background">
-                <span class="highlight-text">頭・肩集中ほぐし：オプション</span>
-            </div>
-            <div class="irradiations">
-                <button type="button" id="fourteenthirradiations" onclick="selectirradiations(this)"
-                    data-price="1200">首リンパ</button>
-                <button type="button" id="fifteenthirradiations" onclick="selectirradiations(this)"
-                    data-price="1000">頭皮ほぐし</button>
-                <button type="button" id="sixteenthirradiations" onclick="selectirradiations(this)"
-                    data-price="500">足浴</button>
-            </div>
-        </div>
-
-        <div id="braintherapy" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆ブレインセラピー◆</span>
-            </div>
-            <div class="symptoms">
+                    data-price="15000">リラックスマッサージ〈30分〉</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment9')"
-                    data-price="3000">ブレインセラピー 30分</button>
-            </div>
-        </div>
-
-        <div id="EMMpulse" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆EMM特殊電子パルス照射◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment10')"
-                    data-price="7200">EMM特殊電子パルス照射75分</button>
+                    data-price="15000">ベーシックマッサージ〈30分〉</button>
             </div>
             <div class="highlight-background">
-                <span class="highlight-text">EMM特殊電子パルス照射：オプション</span>
+                <span class="highlight-text">マッサージコース：オプション</span>
             </div>
             <div class="irradiations">
+                <button type="button" id="twelvethirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">眉カット〈30分〉</button>
+                <button type="button" id="thirteenthirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">襟足〈30分〉</button>
                 <button type="button" id="fourteenthirradiations" onclick="selectirradiations(this)"
-                    data-price="1200">首リンパ</button>
+                    data-price="15000">背中</button>
                 <button type="button" id="fifteenthirradiations" onclick="selectirradiations(this)"
-                    data-price="1000">頭皮ほぐし</button>
+                    data-price="15000">背中(腰まで)〈30分〉</button>
                 <button type="button" id="sixteenthirradiations" onclick="selectirradiations(this)"
-                    data-price="500">足浴</button>
-            </div>
-        </div>
-
-        <div id="healthcheck" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆健康チェックTシステム◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment11')"
-                    data-price="3000">健康チェックTシステム60分</button>
-            </div>
-        </div>
-
-        <div id="dreyes" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆Drアイズ◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment12')"
-                    data-price="4950">Drアイズ45分</button>
-            </div>
-        </div>
-
-        <div id="drprazuma" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆Drプラズマ◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment13')"
-                    data-price="3850">Drプラズマ30分</button>
-            </div>
-        </div>
-
-        <div id="hydrogen" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆水素吸入◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment14')"
-                    data-price="4600">水素吸入60分</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment15')"
-                    data-price="3100">水素吸入30分</button>
-            </div>
-        </div>
-
-        <div id="oxygen" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆酸素吸入◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment16')"
-                    data-price="4600">酸素吸入60分</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment17')"
-                    data-price="3100">酸素吸入30分</button>
+                    data-price="15000">デコルテ〈30分〉</button>
+                <button type="button" id="seventeenthirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">腕〈30分〉</button>
+                <button type="button" id="eighteenthirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">保湿パック〈30分〉</button>
+                <button type="button" id="nineteenthirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">美白パック〈30分〉</button>
             </div>
         </div>
 
@@ -1045,11 +943,11 @@
         let selectedirradiationsTime = 0; // 訪問回数で選択された時間
 
         let menuTimes = {
-            'タイ古式 60分': 60,
-            'タイ古式 90分': 90,
-            'タイ古式+EMM基本コース 90分': 90,
-            'ベーシックフェイシャル 60分': 60,
-            'フットケア 60分': 60,
+            '和装プラン〈30分〉': 30,
+            '洋装プランA〈60分〉': 60,
+            '洋装プランB〈120分〉': 420,
+            '洋装プランC〈30分〉': 30,
+            'リラックスコース〈60分〉': 60,
             'ベーシックコース〈30分〉': 30,
             'スピードコース〈90分〉': 90
         };
@@ -1292,37 +1190,23 @@
             fetchAvailability(currentDate);
 
             if (treatmentId === 'treatment1') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：5,800円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：90分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：6,500円<br>初診料：＋2,200円</strong></div>`;
             } else if (treatmentId === 'treatment2') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：7,800円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：60分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：4,500円<br>初診料：＋2,200円</strong></div>`;
             } else if (treatmentId === 'treatment3') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：12,000円<br>＋パッド代1,200円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：120分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：8,700円<br>初診料：＋2,200円</strong></div>`;
+            } else if (treatmentId === 'treatment4') {
+                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：30分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：1,700円<br>初診料：＋2,200円</strong></div>`;
             } else if (treatmentId === 'treatment5') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：5,800円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：60分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：6,500円</strong></div>`;
             } else if (treatmentId === 'treatment6') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：5,800円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：30分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：4,500円</strong></div>`;
             } else if (treatmentId === 'treatment7') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：6,800円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：90分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：8,700円</strong></div>`;
             } else if (treatmentId === 'treatment8') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：6,800円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：15分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：1,700円</strong></div>`;
             } else if (treatmentId === 'treatment9') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：3,000円</strong></div>`;
-            } else if (treatmentId === 'treatment10') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>初回料金：6,000円<br>＋パッド代1200円</strong></div>`;
-            } else if (treatmentId === 'treatment11') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：3,000円</strong></div>`;
-            } else if (treatmentId === 'treatment12') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：大人3,850円<br>高校生以下2,200円<br>＋パッド代1100円</strong></div>`;
-            } else if (treatmentId === 'treatment13') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：3,850円</strong></div>`;
-            } else if (treatmentId === 'treatment14') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：3,500円<br>＋カニューラ1,100円</strong></div>`;
-            } else if (treatmentId === 'treatment15') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：2,000円<br>＋カニューラ1,100円</strong></div>`;
-            } else if (treatmentId === 'treatment16') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：3,500円<br>＋カニューラ1,100円</strong></div>`;
-            } else if (treatmentId === 'treatment17') {
-                treatmentText.innerHTML = `<div style="text-align: left;">※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：2,000円<br>＋カニューラ1,100円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：15分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：1,700円</strong></div>`;
             } else {
                 treatmentText.innerHTML = '';
             }
@@ -1568,61 +1452,239 @@
         }
 
         async function fetchAvailability(date) {
-            const startTime = new Date(date);
-            const endTime = new Date(date);
-            endTime.setDate(endTime.getDate() + 7);
+    console.log('=== fetchAvailability 開始 ===');
+    console.log('入力された日付:', date);
+    
+    const startTime = new Date(date);
+    const endTime = new Date(date);
+    endTime.setDate(endTime.getDate() + 7);
+    
+    console.log('開始日時:', startTime.toISOString());
+    console.log('終了日時:', endTime.toISOString());
 
-            const cacheKey = startTime.toISOString() + endTime.toISOString();
+    const cacheKey = startTime.toISOString() + endTime.toISOString();
+    console.log('キャッシュキー:', cacheKey);
 
-            // キャッシュを確認
-            if (availabilityCache[cacheKey]) {
-                console.log('Using cached data');
-                updateCalendar(availabilityCache[cacheKey].availability, availabilityCache[cacheKey].businessDays);
-                return;
+    // キャッシュを確認
+    if (availabilityCache[cacheKey]) {
+        console.log('キャッシュからデータを取得');
+        updateCalendar(availabilityCache[cacheKey].availability, availabilityCache[cacheKey].businessDays);
+        return;
+    }
+
+    const url = 'https://script.google.com/macros/s/AKfycbw-bfg27C3eqT0vpyHP7OK96cwml53GVqhl2Xqc1n4P13eVmt9wORSZCm-ALA1kpf8PhQ/exec' +
+        `?startTime=${startTime.toISOString()}&endTime=${endTime.toISOString()}`;
+
+    console.log('リクエストURL:', url);
+
+    try {
+        showLoadingSpinner();
+        console.log('リクエスト送信開始...');
+        
+        // タイムアウト付きのfetch
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10秒でタイムアウト
+        
+        const response = await fetch(url, {
+            method: 'GET',
+            signal: controller.signal,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
-
-            const url = 'https://script.google.com/macros/s/AKfycbwCxnJaxGZ46c3TnnesuZcD_zuxuVoSHoDHo5MxkRzChcK5vZDwBs4HstzkXO-KLyuDYA/exec' +
-                `?startTime=${startTime.toISOString()}&endTime=${endTime.toISOString()}`;
-
-            try {
-                showLoadingSpinner(); // Show loading spinner
-                const response = await fetch(url);
-                const data = await response.json();
-                console.log(data);
-
-                // 営業日の情報を抽出
-                const businessDays = data.filter(event => event.summary === "営業日").map(event => {
-                    return {
-                        start: new Date(event.startTime),
-                        end: new Date(event.endTime)
-                    };
-                });
-
-                // データをキャッシュに保存
-                availabilityCache[cacheKey] = { availability: data, businessDays: businessDays };
-
-                updateCalendar(data, businessDays);
-            } catch (error) {
-                console.error('Error fetching availability:', error);
-            } finally {
-                hideLoadingSpinner(); // Hide loading spinner
-            }
+        });
+        
+        clearTimeout(timeoutId);
+        
+        console.log('レスポンス受信完了');
+        console.log('ステータスコード:', response.status);
+        console.log('ステータステキスト:', response.statusText);
+        console.log('レスポンスヘッダー:', Object.fromEntries(response.headers.entries()));
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('HTTPエラー詳細:', errorText);
+            throw new Error(`HTTP ${response.status}: ${response.statusText}\n詳細: ${errorText}`);
         }
+        
+        // レスポンステキストを先に取得してログ出力
+        const responseText = await response.text();
+        console.log('レスポンステキスト（生データ）:', responseText);
+        
+        let data;
+        try {
+            data = JSON.parse(responseText);
+            console.log('JSONパース成功');
+        } catch (parseError) {
+            console.error('JSONパースエラー:', parseError);
+            console.error('パースできないデータ:', responseText);
+            throw new Error(`JSON解析エラー: ${parseError.message}\nレスポンス: ${responseText}`);
+        }
+        
+        console.log('受信データの型:', typeof data);
+        console.log('受信データの内容:', data);
+        
+        // データの形式を確認
+        if (!Array.isArray(data)) {
+            console.error('配列以外のデータを受信:', data);
+            
+            // エラーオブジェクトかどうかチェック
+            if (data && data.error) {
+                throw new Error(`GASエラー: ${data.message || 'unknown error'}`);
+            }
+            
+            throw new Error(`無効なデータ形式: 配列を期待しましたが${typeof data}を受信`);
+        }
+        
+        console.log('データ配列の長さ:', data.length);
+        
+        // 各データ項目をチェック
+        data.forEach((item, index) => {
+            console.log(`データ項目 ${index}:`, item);
+        });
+
+        // 営業日の情報を抽出
+        const businessDays = data.filter(event => {
+            console.log('イベントチェック:', event.summary || event.title);
+            return (event.summary === "営業日" || event.title === "営業日");
+        }).map(event => {
+            const businessDay = {
+                start: new Date(event.startTime),
+                end: new Date(event.endTime)
+            };
+            console.log('営業日データ:', businessDay);
+            return businessDay;
+        });
+
+        console.log('抽出された営業日数:', businessDays.length);
+        console.log('営業日詳細:', businessDays);
+
+        // データをキャッシュに保存
+        availabilityCache[cacheKey] = { 
+            availability: data, 
+            businessDays: businessDays 
+        };
+        console.log('データをキャッシュに保存完了');
+
+        console.log('updateCalendar呼び出し開始');
+        updateCalendar(data, businessDays);
+        console.log('updateCalendar呼び出し完了');
+        
+    } catch (error) {
+        console.error('=== エラー詳細 ===');
+        console.error('エラータイプ:', error.constructor.name);
+        console.error('エラーメッセージ:', error.message);
+        console.error('スタックトレース:', error.stack);
+        
+        // ネットワークエラーの場合の詳細情報
+        if (error.name === 'AbortError') {
+            console.error('リクエストがタイムアウトしました');
+            alert('カレンダーの読み込みがタイムアウトしました。ネットワーク接続を確認してください。');
+        } else if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+            console.error('ネットワークエラーまたはCORSエラーの可能性');
+            alert('カレンダーの読み込みに失敗しました。インターネット接続を確認してください。');
+        } else {
+            console.error('その他のエラー');
+            alert(`エラーが発生しました: ${error.message}`);
+        }
+        
+        // フォールバック：空のカレンダーを表示
+        console.log('フォールバック処理: 空のカレンダーを表示');
+        updateCalendar([], []);
+        
+    } finally {
+        hideLoadingSpinner();
+        console.log('=== fetchAvailability 終了 ===');
+    }
+}
+
+// GAS接続テスト関数（コンソールで実行用）
+function testGASConnection() {
+    console.log('=== GAS接続テスト開始 ===');
+    
+    const testUrl = 'https://script.google.com/macros/s/AKfycbw-bfg27C3eqT0vpyHP7OK96cwml53GVqhl2Xqc1n4P13eVmt9wORSZCm-ALA1kpf8PhQ/exec?startTime=2025-06-20T00:00:00.000Z&endTime=2025-06-27T00:00:00.000Z';
+    
+    fetch(testUrl)
+        .then(response => {
+            console.log('テストレスポンス状態:', response.status);
+            console.log('テストレスポンスヘッダー:', Object.fromEntries(response.headers.entries()));
+            return response.text();
+        })
+        .then(text => {
+            console.log('テストレスポンステキスト:', text);
+            try {
+                const json = JSON.parse(text);
+                console.log('テストJSONデータ:', json);
+                console.log('GAS接続テスト: 成功');
+            } catch (e) {
+                console.error('テストJSONパースエラー:', e);
+                console.log('GAS接続テスト: JSON形式エラー');
+            }
+        })
+        .catch(error => {
+            console.error('GAS接続テストエラー:', error);
+            console.log('GAS接続テスト: 失敗');
+        });
+}
+
+// 簡易的なネットワーク状態チェック
+function checkNetworkStatus() {
+    console.log('ネットワーク状態:', navigator.onLine ? 'オンライン' : 'オフライン');
+    
+    // Google.comへの簡易接続テスト
+    fetch('https://www.google.com/favicon.ico', { 
+        mode: 'no-cors',
+        cache: 'no-cache'
+    })
+    .then(() => {
+        console.log('インターネット接続: OK');
+    })
+    .catch(() => {
+        console.log('インターネット接続: エラー');
+    });
+}
+
+        // エラーハンドリング用の関数を追加
+        function handleFetchError(error) {
+            // ユーザーにエラーを通知
+            const errorMessage = document.createElement('div');
+            errorMessage.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #ff6b6b;
+                color: white;
+                padding: 20px;
+                border-radius: 8px;
+                z-index: 1000;
+                text-align: center;
+            `;
+            errorMessage.innerHTML = `
+                <h3>カレンダーの読み込みに失敗しました</h3>
+                <p>しばらく時間をおいて再度お試しください</p>
+                <button onclick="this.parentElement.remove()" style="margin-top: 10px; padding: 5px 15px;">閉じる</button>
+            `;
+            document.body.appendChild(errorMessage);
+            
+            // 3秒後に自動で消去
+            setTimeout(() => {
+                if (errorMessage.parentElement) {
+                    errorMessage.remove();
+                }
+            }, 3000);
+        }
+
 
         function updateCalendar(availability, businessDays) {
             const calendar = document.getElementById('calendar1');
             const table = calendar.querySelector('table tbody');
 
             const times = [
-                '09:00', '09:15', '09:30', '09:45',
-                '10:00', '10:15', '10:30', '10:45',
-                '11:00', '11:15', '11:30', '11:45',
-                '12:00', '12:15', '12:30', '12:45',
-                '13:00', '13:15', '13:30', '13:45',
-                '14:00', '14:15', '14:30', '14:45',
-                '15:00', '15:15', '15:30', '15:45',
-                '16:00', '16:15', '16:30', '16:45',
-                '17:00', '17:15', '17:30', '17:45',
+                '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
+                '12:00', '12:30', '13:00', '13:30',
+                '14:00', '14:30', '15:00', '15:30',
+                '16:00', '16:30', '17:00', '17:30',
                 '18:00'
             ];
 
@@ -1700,59 +1762,6 @@
                         continue;
                     }
 
-                    const sundayBusinessHours = {
-                        start: 14,      // 14時開始
-                        startMinute: 0,
-                        end: 18,        // 18時終了
-                        endMinute: 0
-                    };
-
-                     // 日曜日の場合の特別処理
-                    if (slotStart.getDay() === 0) { // 日曜日
-                        // 日曜日の営業時間外チェック
-                        const slotHour = slotStart.getHours();
-                        const slotMinute = slotStart.getMinutes();
-                        const endHour = slotEnd.getHours();
-                        const endMinute = slotEnd.getMinutes();
-
-                        // 開始時間が営業時間前
-                        if (slotHour < sundayBusinessHours.start || 
-                            (slotHour === sundayBusinessHours.start && slotMinute < sundayBusinessHours.startMinute)) {
-                            cell.textContent = '✕';
-                            cell.classList.add('unavailable');
-                            continue;
-                        }
-
-                        // 過去の時間はチェック
-                        if (slotStart < now) {
-                            cell.textContent = '✕';
-                            cell.classList.add('unavailable');
-                            continue;
-                        }
-
-                        // 日曜日で営業時間内の場合、Google Calendar の予約状況をチェック
-                        const count = availability.reduce((acc, slot) => {
-                            const eventStart = new Date(slot.startTime);
-                            const eventEnd = new Date(slot.endTime);
-                            if (eventStart < slotEnd && slotStart < eventEnd && slot.title !== "営業日") {
-                                return acc + 1;
-                            }
-                            return acc;
-                        }, 0);
-
-                        if (count > 0) {
-                            cell.textContent = '✕';
-                            cell.classList.add('unavailable');
-                        } else {
-                            cell.textContent = '◯';
-                            cell.classList.add('available');
-                        }
-
-                        cell.setAttribute('data-date', slotStart.toISOString());
-                        continue; // 日曜日の処理はここで終了
-                    }
-
-                    /*
                     // 18時以降に終了する予約を不可にする (17:30は可)
                     if (slotEnd.getHours() === 18 && slotEnd.getMinutes() > 0) {
                         cell.textContent = '✕';
@@ -1763,7 +1772,6 @@
                         cell.classList.add('unavailable');
                         continue;
                     }
-                    */
 
                     // ここで終了時間を使った条件処理を行う
                     // 例えば、リアルタイムで既に過ぎた時間帯は×にする
@@ -1965,6 +1973,105 @@
         function hideLoadingSpinner() {
             document.getElementById('loadingSpinner').style.display = 'none';
         }
+
+        function displayFallbackCalendar() {
+            console.log('フォールバックカレンダーを表示');
+            
+            // 基本的な営業時間（月-土 9:00-18:00、日曜定休）
+            const fallbackBusinessDays = [];
+            
+            // 7日分のフォールバックデータを作成
+            for (let i = 0; i < 7; i++) {
+                const day = new Date(currentDate);
+                day.setDate(day.getDate() + i);
+                
+                // 日曜日以外は営業日として設定
+                if (day.getDay() !== 0) {
+                    const start = new Date(day);
+                    start.setHours(9, 0, 0, 0);
+                    
+                    const end = new Date(day);
+                    end.setHours(18, 0, 0, 0);
+                    
+                    fallbackBusinessDays.push({
+                        start: start,
+                        end: end
+                    });
+                }
+            }
+            
+            // 空のイベントデータでカレンダーを更新
+            updateCalendar([], fallbackBusinessDays);
+            
+            // ユーザーに通知
+            const notice = document.createElement('div');
+            notice.style.cssText = `
+                background: #fff3cd;
+                border: 1px solid #ffeaa7;
+                color: #856404;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 5px;
+                text-align: center;
+            `;
+            notice.innerHTML = `
+                <strong>⚠️ 注意</strong><br>
+                リアルタイムの空き状況を取得できませんでした。<br>
+                基本営業時間（月-土 9:00-18:00）を表示しています。<br>
+                正確な空き状況は直接お電話でご確認ください。
+            `;
+            
+            // カレンダーの上に注意書きを挿入
+            const calendarContainer = document.querySelector('.calendar-container');
+            if (calendarContainer) {
+                calendarContainer.insertBefore(notice, calendarContainer.firstChild);
+            }
+        }
+
+        // 改良版のfetchAvailability（フォールバック機能付き）
+        async function fetchAvailabilityWithFallback(date) {
+            try {
+                await fetchAvailability(date);
+            } catch (error) {
+                console.error('通常のカレンダー読み込みに失敗、フォールバックを実行:', error);
+                displayFallbackCalendar();
+            }
+        }
+
+        // エラー発生時の手動リトライ機能
+        function retryCalendarLoad() {
+            console.log('カレンダー読み込み再試行...');
+            
+            // キャッシュをクリア
+            availabilityCache = {};
+            
+            // 再読み込み
+            fetchAvailability(currentDate);
+        }
+
+        // カレンダー上部にリトライボタンを追加する関数
+        function addRetryButton() {
+            const retryButton = document.createElement('button');
+            retryButton.innerHTML = '🔄 再読み込み';
+            retryButton.style.cssText = `
+                background: #007bff;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin: 10px 0;
+                font-size: 14px;
+            `;
+            retryButton.onclick = retryCalendarLoad;
+            
+            const calendarContainer = document.querySelector('.calendar-container');
+            if (calendarContainer && !calendarContainer.querySelector('.retry-button')) {
+                retryButton.className = 'retry-button';
+                calendarContainer.insertBefore(retryButton, calendarContainer.firstChild);
+            }
+        }
+        
     </script>
 </body>
 
