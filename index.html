@@ -1452,229 +1452,46 @@
         }
 
         async function fetchAvailability(date) {
-    console.log('=== fetchAvailability 開始 ===');
-    console.log('入力された日付:', date);
-    
-    const startTime = new Date(date);
-    const endTime = new Date(date);
-    endTime.setDate(endTime.getDate() + 7);
-    
-    console.log('開始日時:', startTime.toISOString());
-    console.log('終了日時:', endTime.toISOString());
+            const startTime = new Date(date);
+            const endTime = new Date(date);
+            endTime.setDate(endTime.getDate() + 7);
 
-    const cacheKey = startTime.toISOString() + endTime.toISOString();
-    console.log('キャッシュキー:', cacheKey);
+            const cacheKey = startTime.toISOString() + endTime.toISOString();
 
-    // キャッシュを確認
-    if (availabilityCache[cacheKey]) {
-        console.log('キャッシュからデータを取得');
-        updateCalendar(availabilityCache[cacheKey].availability, availabilityCache[cacheKey].businessDays);
-        return;
-    }
-
-    const url = 'https://script.google.com/macros/s/AKfycbxGjjPXE1yh4A1lV7KKA0HXEZ4rYbyYxdAg6jihZTLGyQnw1K4NWPV0CRvh4t4Hw0pCBw/exec' +
-        `?startTime=${startTime.toISOString()}&endTime=${endTime.toISOString()}`;
-
-    console.log('リクエストURL:', url);
-
-    try {
-        showLoadingSpinner();
-        console.log('リクエスト送信開始...');
-        
-        // タイムアウト付きのfetch
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10秒でタイムアウト
-        
-        const response = await fetch(url, {
-            method: 'GET',
-            signal: controller.signal,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+            // キャッシュを確認
+            if (availabilityCache[cacheKey]) {
+                console.log('Using cached data');
+                updateCalendar(availabilityCache[cacheKey].availability, availabilityCache[cacheKey].businessDays);
+                return;
             }
-        });
-        
-        clearTimeout(timeoutId);
-        
-        console.log('レスポンス受信完了');
-        console.log('ステータスコード:', response.status);
-        console.log('ステータステキスト:', response.statusText);
-        console.log('レスポンスヘッダー:', Object.fromEntries(response.headers.entries()));
-        
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('HTTPエラー詳細:', errorText);
-            throw new Error(`HTTP ${response.status}: ${response.statusText}\n詳細: ${errorText}`);
-        }
-        
-        // レスポンステキストを先に取得してログ出力
-        const responseText = await response.text();
-        console.log('レスポンステキスト（生データ）:', responseText);
-        
-        let data;
-        try {
-            data = JSON.parse(responseText);
-            console.log('JSONパース成功');
-        } catch (parseError) {
-            console.error('JSONパースエラー:', parseError);
-            console.error('パースできないデータ:', responseText);
-            throw new Error(`JSON解析エラー: ${parseError.message}\nレスポンス: ${responseText}`);
-        }
-        
-        console.log('受信データの型:', typeof data);
-        console.log('受信データの内容:', data);
-        
-        // データの形式を確認
-        if (!Array.isArray(data)) {
-            console.error('配列以外のデータを受信:', data);
-            
-            // エラーオブジェクトかどうかチェック
-            if (data && data.error) {
-                throw new Error(`GASエラー: ${data.message || 'unknown error'}`);
-            }
-            
-            throw new Error(`無効なデータ形式: 配列を期待しましたが${typeof data}を受信`);
-        }
-        
-        console.log('データ配列の長さ:', data.length);
-        
-        // 各データ項目をチェック
-        data.forEach((item, index) => {
-            console.log(`データ項目 ${index}:`, item);
-        });
 
-        // 営業日の情報を抽出
-        const businessDays = data.filter(event => {
-            console.log('イベントチェック:', event.summary || event.title);
-            return (event.summary === "営業日" || event.title === "営業日");
-        }).map(event => {
-            const businessDay = {
-                start: new Date(event.startTime),
-                end: new Date(event.endTime)
-            };
-            console.log('営業日データ:', businessDay);
-            return businessDay;
-        });
+            const url = 'https://script.google.com/macros/s/AKfycbxD6oBd7B_d7VKxCWiLjVgKY1jeuGhoUCWbTpkIAzWVulLlwY7cm0dgvaqxc0sPYnytkQ/exec' +
+                `?startTime=${startTime.toISOString()}&endTime=${endTime.toISOString()}`;
 
-        console.log('抽出された営業日数:', businessDays.length);
-        console.log('営業日詳細:', businessDays);
-
-        // データをキャッシュに保存
-        availabilityCache[cacheKey] = { 
-            availability: data, 
-            businessDays: businessDays 
-        };
-        console.log('データをキャッシュに保存完了');
-
-        console.log('updateCalendar呼び出し開始');
-        updateCalendar(data, businessDays);
-        console.log('updateCalendar呼び出し完了');
-        
-    } catch (error) {
-        console.error('=== エラー詳細 ===');
-        console.error('エラータイプ:', error.constructor.name);
-        console.error('エラーメッセージ:', error.message);
-        console.error('スタックトレース:', error.stack);
-        
-        // ネットワークエラーの場合の詳細情報
-        if (error.name === 'AbortError') {
-            console.error('リクエストがタイムアウトしました');
-            alert('カレンダーの読み込みがタイムアウトしました。ネットワーク接続を確認してください。');
-        } else if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
-            console.error('ネットワークエラーまたはCORSエラーの可能性');
-            alert('カレンダーの読み込みに失敗しました。インターネット接続を確認してください。');
-        } else {
-            console.error('その他のエラー');
-            alert(`エラーが発生しました: ${error.message}`);
-        }
-        
-        // フォールバック：空のカレンダーを表示
-        console.log('フォールバック処理: 空のカレンダーを表示');
-        updateCalendar([], []);
-        
-    } finally {
-        hideLoadingSpinner();
-        console.log('=== fetchAvailability 終了 ===');
-    }
-}
-
-// GAS接続テスト関数（コンソールで実行用）
-function testGASConnection() {
-    console.log('=== GAS接続テスト開始 ===');
-    
-    const testUrl = 'https://script.google.com/macros/s/AKfycbw-bfg27C3eqT0vpyHP7OK96cwml53GVqhl2Xqc1n4P13eVmt9wORSZCm-ALA1kpf8PhQ/exec?startTime=2025-06-20T00:00:00.000Z&endTime=2025-06-27T00:00:00.000Z';
-    
-    fetch(testUrl)
-        .then(response => {
-            console.log('テストレスポンス状態:', response.status);
-            console.log('テストレスポンスヘッダー:', Object.fromEntries(response.headers.entries()));
-            return response.text();
-        })
-        .then(text => {
-            console.log('テストレスポンステキスト:', text);
             try {
-                const json = JSON.parse(text);
-                console.log('テストJSONデータ:', json);
-                console.log('GAS接続テスト: 成功');
-            } catch (e) {
-                console.error('テストJSONパースエラー:', e);
-                console.log('GAS接続テスト: JSON形式エラー');
+                showLoadingSpinner(); // Show loading spinner
+                const response = await fetch(url);
+                const data = await response.json();
+                console.log(data);
+
+                // 営業日の情報を抽出
+                const businessDays = data.filter(event => event.summary === "営業日").map(event => {
+                    return {
+                        start: new Date(event.startTime),
+                        end: new Date(event.endTime)
+                    };
+                });
+
+                // データをキャッシュに保存
+                availabilityCache[cacheKey] = { availability: data, businessDays: businessDays };
+
+                updateCalendar(data, businessDays);
+            } catch (error) {
+                console.error('Error fetching availability:', error);
+            } finally {
+                hideLoadingSpinner(); // Hide loading spinner
             }
-        })
-        .catch(error => {
-            console.error('GAS接続テストエラー:', error);
-            console.log('GAS接続テスト: 失敗');
-        });
-}
-
-// 簡易的なネットワーク状態チェック
-function checkNetworkStatus() {
-    console.log('ネットワーク状態:', navigator.onLine ? 'オンライン' : 'オフライン');
-    
-    // Google.comへの簡易接続テスト
-    fetch('https://www.google.com/favicon.ico', { 
-        mode: 'no-cors',
-        cache: 'no-cache'
-    })
-    .then(() => {
-        console.log('インターネット接続: OK');
-    })
-    .catch(() => {
-        console.log('インターネット接続: エラー');
-    });
-}
-
-        // エラーハンドリング用の関数を追加
-        function handleFetchError(error) {
-            // ユーザーにエラーを通知
-            const errorMessage = document.createElement('div');
-            errorMessage.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: #ff6b6b;
-                color: white;
-                padding: 20px;
-                border-radius: 8px;
-                z-index: 1000;
-                text-align: center;
-            `;
-            errorMessage.innerHTML = `
-                <h3>カレンダーの読み込みに失敗しました</h3>
-                <p>しばらく時間をおいて再度お試しください</p>
-                <button onclick="this.parentElement.remove()" style="margin-top: 10px; padding: 5px 15px;">閉じる</button>
-            `;
-            document.body.appendChild(errorMessage);
-            
-            // 3秒後に自動で消去
-            setTimeout(() => {
-                if (errorMessage.parentElement) {
-                    errorMessage.remove();
-                }
-            }, 3000);
         }
-
 
         function updateCalendar(availability, businessDays) {
             const calendar = document.getElementById('calendar1');
@@ -1817,11 +1634,10 @@ function checkNetworkStatus() {
                         cell.classList.add('unavailable');
                     }
                     // 日曜日で、営業日ではない場合
-                    /*else if (slotStart.getDay() === 0 && !isBusinessDay && businessEventTimes.length === 0) {
+                    else if (slotStart.getDay() === 0 && !isBusinessDay && businessEventTimes.length === 0) {
                         cell.textContent = '✕';
                         cell.classList.add('unavailable');
-                    }*/
-                   
+                    }
                     // 営業日でかつ他のイベントがない場合
                     else if (isBusinessDay && count === 0) {
                         cell.textContent = '◯';
@@ -1974,105 +1790,6 @@ function checkNetworkStatus() {
         function hideLoadingSpinner() {
             document.getElementById('loadingSpinner').style.display = 'none';
         }
-
-        function displayFallbackCalendar() {
-            console.log('フォールバックカレンダーを表示');
-            
-            // 基本的な営業時間（月-土 9:00-18:00、日曜定休）
-            const fallbackBusinessDays = [];
-            
-            // 7日分のフォールバックデータを作成
-            for (let i = 0; i < 7; i++) {
-                const day = new Date(currentDate);
-                day.setDate(day.getDate() + i);
-                
-                // 日曜日以外は営業日として設定
-                if (day.getDay() !== 0) {
-                    const start = new Date(day);
-                    start.setHours(9, 0, 0, 0);
-                    
-                    const end = new Date(day);
-                    end.setHours(18, 0, 0, 0);
-                    
-                    fallbackBusinessDays.push({
-                        start: start,
-                        end: end
-                    });
-                }
-            }
-            
-            // 空のイベントデータでカレンダーを更新
-            updateCalendar([], fallbackBusinessDays);
-            
-            // ユーザーに通知
-            const notice = document.createElement('div');
-            notice.style.cssText = `
-                background: #fff3cd;
-                border: 1px solid #ffeaa7;
-                color: #856404;
-                padding: 15px;
-                margin: 10px 0;
-                border-radius: 5px;
-                text-align: center;
-            `;
-            notice.innerHTML = `
-                <strong>⚠️ 注意</strong><br>
-                リアルタイムの空き状況を取得できませんでした。<br>
-                基本営業時間（月-土 9:00-18:00）を表示しています。<br>
-                正確な空き状況は直接お電話でご確認ください。
-            `;
-            
-            // カレンダーの上に注意書きを挿入
-            const calendarContainer = document.querySelector('.calendar-container');
-            if (calendarContainer) {
-                calendarContainer.insertBefore(notice, calendarContainer.firstChild);
-            }
-        }
-
-        // 改良版のfetchAvailability（フォールバック機能付き）
-        async function fetchAvailabilityWithFallback(date) {
-            try {
-                await fetchAvailability(date);
-            } catch (error) {
-                console.error('通常のカレンダー読み込みに失敗、フォールバックを実行:', error);
-                displayFallbackCalendar();
-            }
-        }
-
-        // エラー発生時の手動リトライ機能
-        function retryCalendarLoad() {
-            console.log('カレンダー読み込み再試行...');
-            
-            // キャッシュをクリア
-            availabilityCache = {};
-            
-            // 再読み込み
-            fetchAvailability(currentDate);
-        }
-
-        // カレンダー上部にリトライボタンを追加する関数
-        function addRetryButton() {
-            const retryButton = document.createElement('button');
-            retryButton.innerHTML = '🔄 再読み込み';
-            retryButton.style.cssText = `
-                background: #007bff;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-                margin: 10px 0;
-                font-size: 14px;
-            `;
-            retryButton.onclick = retryCalendarLoad;
-            
-            const calendarContainer = document.querySelector('.calendar-container');
-            if (calendarContainer && !calendarContainer.querySelector('.retry-button')) {
-                retryButton.className = 'retry-button';
-                calendarContainer.insertBefore(retryButton, calendarContainer.firstChild);
-            }
-        }
-        
     </script>
 </body>
 
