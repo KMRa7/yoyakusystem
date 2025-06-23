@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>予約フォーム</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
         /* 右端の細いナビ（固定） */
         .side-nav {
@@ -1472,7 +1472,7 @@
         return;
     }
 
-    const url = 'https://script.google.com/macros/s/AKfycbz2Kfa3Se0MVzwZzAMx1RU7b8lY2VgeNeuaYri_Un5wsUSqqLZz1xotNk4UXbg1iMk16Q/exec' +
+    const url = 'https://script.google.com/macros/s/AKfycbxGjjPXE1yh4A1lV7KKA0HXEZ4rYbyYxdAg6jihZTLGyQnw1K4NWPV0CRvh4t4Hw0pCBw/exec' +
         `?startTime=${startTime.toISOString()}&endTime=${endTime.toISOString()}`;
 
     console.log('リクエストURL:', url);
@@ -1821,6 +1821,7 @@ function checkNetworkStatus() {
                         cell.textContent = '✕';
                         cell.classList.add('unavailable');
                     }*/
+                   
                     // 営業日でかつ他のイベントがない場合
                     else if (isBusinessDay && count === 0) {
                         cell.textContent = '◯';
