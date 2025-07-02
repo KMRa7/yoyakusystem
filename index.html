@@ -7,7 +7,7 @@
     <title>予約フォーム</title>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
-        :root {
+         :root {
             --primary-color: #059669;
             --primary-light: #10b981;
             --primary-dark: #047857;
@@ -22,18 +22,19 @@
             --text-secondary: #166534;
             --text-light: #4ade80;
             --border-color: #bbf7d0;
-            --shadow-sm: 0 1px 2px 0 rgba(5, 150, 105, 0.1);
-            --shadow-md: 0 4px 6px -1px rgba(5, 150, 105, 0.15), 0 2px 4px -1px rgba(5, 150, 105, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(5, 150, 105, 0.2), 0 4px 6px -2px rgba(5, 150, 105, 0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(5, 150, 105, 0.25), 0 10px 10px -5px rgba(5, 150, 105, 0.1);
-            --border-radius-sm: 6px;
+            --shadow-sm: 0 2px 4px 0 rgba(5, 150, 105, 0.1);
+            --shadow-md: 0 4px 8px -2px rgba(5, 150, 105, 0.15), 0 2px 4px -1px rgba(5, 150, 105, 0.1);
+            --shadow-lg: 0 8px 16px -4px rgba(5, 150, 105, 0.2), 0 4px 8px -2px rgba(5, 150, 105, 0.1);
+            --shadow-xl: 0 16px 32px -8px rgba(5, 150, 105, 0.25), 0 8px 16px -4px rgba(5, 150, 105, 0.1);
+            --border-radius-sm: 8px;
             --border-radius-md: 12px;
             --border-radius-lg: 16px;
-            --spacing-xs: 4px;
-            --spacing-sm: 8px;
+            --spacing-xs: 6px;
+            --spacing-sm: 12px;
             --spacing-md: 16px;
             --spacing-lg: 24px;
             --spacing-xl: 32px;
+            --touch-target: 44px; /* タッチターゲットの最小サイズ */
         }
 
         * {
@@ -43,44 +44,45 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             background: linear-gradient(135deg, #6ee7b7 0%, #34d399 50%, #10b981 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding: var(--spacing-lg);
+            padding: var(--spacing-sm);
             line-height: 1.6;
             color: var(--text-primary);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* 右端のナビゲーション */
+        /* フローティングナビゲーション（スマホ用に調整） */
         .side-nav {
             position: fixed;
-            right: -10px;
-            top: 50%;
-            transform: translateY(-50%) translateX(20px);
+            bottom: 20px;
+            right: 20px;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: var(--spacing-sm);
-            border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
+            padding: var(--spacing-xs);
+            border-radius: var(--border-radius-lg);
             backdrop-filter: blur(10px);
             box-shadow: var(--shadow-xl);
             z-index: 1000;
-            width: 50px;
-            animation: slideInRight 0.8s ease-out;
+            width: 56px;
+            animation: slideInUp 0.8s ease-out;
         }
 
-        @keyframes slideInRight {
+        @keyframes slideInUp {
             from {
-                transform: translateY(-50%) translateX(100px);
+                transform: translateY(100px);
                 opacity: 0;
             }
             to {
-                transform: translateY(-50%) translateX(20px);
+                transform: translateY(0);
                 opacity: 1;
             }
         }
@@ -97,11 +99,12 @@
             padding: var(--spacing-sm);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: var(--border-radius-sm);
-            width: 36px;
-            height: 36px;
+            width: var(--touch-target);
+            height: var(--touch-target);
             text-align: center;
             position: relative;
             overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .side-nav a::before {
@@ -116,13 +119,9 @@
             transition: opacity 0.3s ease;
         }
 
-        .side-nav a:hover::before {
+        .side-nav a:hover::before,
+        .side-nav a:active::before {
             opacity: 1;
-        }
-
-        .side-nav a:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 16px rgba(5, 150, 105, 0.3);
         }
 
         .side-nav a:active {
@@ -131,10 +130,6 @@
 
         .side-nav a span {
             font-size: 20px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
         }
 
         /* メインコンテナ */
@@ -143,12 +138,13 @@
             border-radius: var(--border-radius-lg);
             box-shadow: var(--shadow-xl);
             width: 100%;
-            max-width: 520px;
-            padding: var(--spacing-xl);
+            max-width: 100%;
+            padding: var(--spacing-lg);
             position: relative;
             backdrop-filter: blur(20px);
             border: 1px solid rgba(16, 185, 129, 0.1);
             animation: fadeInUp 0.8s ease-out;
+            margin-bottom: 80px; /* フローティングナビ用のスペース */
         }
 
         @keyframes fadeInUp {
@@ -169,8 +165,8 @@
             padding: var(--spacing-lg);
             border-radius: var(--border-radius-md);
             text-align: center;
-            margin: calc(-1 * var(--spacing-xl)) calc(-1 * var(--spacing-xl)) var(--spacing-lg);
-            font-size: 28px;
+            margin: calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg)) var(--spacing-lg);
+            font-size: 24px;
             font-weight: 600;
             box-shadow: var(--shadow-lg);
             position: relative;
@@ -197,7 +193,7 @@
         .label {
             display: block;
             margin-bottom: var(--spacing-md);
-            padding: var(--spacing-sm) var(--spacing-md);
+            padding: var(--spacing-md) var(--spacing-lg);
             font-weight: 600;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             color: white;
@@ -208,17 +204,17 @@
             overflow: hidden;
             box-shadow: var(--shadow-sm);
             transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .label:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+        .label:active {
+            transform: translateY(1px);
         }
 
         .labelContent {
             display: block;
             margin-bottom: var(--spacing-md);
-            padding: var(--spacing-sm) var(--spacing-md);
+            padding: var(--spacing-md) var(--spacing-lg);
             font-weight: 600;
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
             color: white;
@@ -229,11 +225,11 @@
             overflow: hidden;
             box-shadow: var(--shadow-sm);
             transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .labelContent:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+        .labelContent:active {
+            transform: translateY(1px);
         }
 
         /* 必須マーク */
@@ -242,8 +238,8 @@
             color: white;
             font-weight: 500;
             font-size: 0.75em;
-            padding: 2px 6px;
-            border-radius: 4px;
+            padding: 4px 8px;
+            border-radius: 6px;
             margin-left: var(--spacing-sm);
             vertical-align: middle;
             box-shadow: var(--shadow-sm);
@@ -258,18 +254,23 @@
         /* フォーム要素 */
         input[type="text"],
         input[type="tel"],
+        input[type="email"],
         input[type="datetime-local"],
         textarea {
             width: 100%;
-            padding: var(--spacing-md);
+            padding: var(--spacing-lg);
             margin-bottom: var(--spacing-lg);
             border: 2px solid var(--border-color);
             border-radius: var(--border-radius-sm);
-            font-size: 16px;
+            font-size: 16px; /* iOSのズームを防ぐ */
             font-family: inherit;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             background: var(--background-secondary);
             color: var(--text-primary);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            min-height: var(--touch-target);
         }
 
         input:focus,
@@ -277,7 +278,11 @@
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
-            transform: translateY(-2px);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
         }
 
         /* ボタン群 */
@@ -288,7 +293,7 @@
         .options {
             display: flex;
             flex-direction: column;
-            gap: var(--spacing-sm);
+            gap: var(--spacing-md);
             margin-bottom: var(--spacing-lg);
         }
 
@@ -298,17 +303,22 @@
         .irradiations button,
         .options button {
             width: 100%;
-            padding: var(--spacing-md);
+            padding: var(--spacing-lg);
             border: 2px solid var(--border-color);
             border-radius: var(--border-radius-sm);
             background: var(--background-secondary);
             color: var(--text-primary);
             cursor: pointer;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 500;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            min-height: var(--touch-target);
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
         .visit-buttons button::before,
@@ -326,22 +336,20 @@
             transition: left 0.5s ease;
         }
 
-        .visit-buttons button:hover::before,
-        .symptoms button:hover::before,
-        .menu-sections button:hover::before,
-        .irradiations button:hover::before,
-        .options button:hover::before {
+        .visit-buttons button:active::before,
+        .symptoms button:active::before,
+        .menu-sections button:active::before,
+        .irradiations button:active::before,
+        .options button:active::before {
             left: 100%;
         }
 
-        .visit-buttons button:hover,
-        .symptoms button:hover,
-        .menu-sections button:hover,
-        .irradiations button:hover,
-        .options button:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+        .visit-buttons button:active,
+        .symptoms button:active,
+        .menu-sections button:active,
+        .irradiations button:active,
+        .options button:active {
+            transform: scale(0.98);
         }
 
         .visit-buttons button.active,
@@ -353,7 +361,6 @@
             color: white;
             border-color: var(--primary-color);
             box-shadow: var(--shadow-lg);
-            transform: translateY(-1px);
         }
 
         /* カレンダー */
@@ -381,12 +388,14 @@
 
         .calendar th,
         .calendar td {
-            padding: var(--spacing-sm);
+            padding: var(--spacing-md);
             text-align: center;
             border: 1px solid var(--border-color);
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
+            min-height: var(--touch-target);
+            -webkit-tap-highlight-color: transparent;
         }
 
         .calendar th {
@@ -395,10 +404,10 @@
             font-weight: 600;
         }
 
-        .calendar td:hover {
+        .calendar td:active {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             color: white;
-            transform: scale(1.05);
+            transform: scale(0.95);
         }
 
         .calendar td.selected {
@@ -426,11 +435,12 @@
             align-items: center;
             width: 100%;
             margin-bottom: var(--spacing-md);
+            gap: var(--spacing-md);
         }
 
         .week-button,
         .month-button {
-            padding: var(--spacing-sm) var(--spacing-lg);
+            padding: var(--spacing-md) var(--spacing-lg);
             background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
             color: white;
             border: none;
@@ -439,19 +449,20 @@
             font-weight: 500;
             transition: all 0.3s ease;
             box-shadow: var(--shadow-sm);
+            flex: 1;
+            min-height: var(--touch-target);
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
-        .week-button:hover,
-        .month-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+        .week-button:active,
+        .month-button:active {
+            transform: scale(0.95);
         }
 
         .current-month {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             color: white;
             padding: var(--spacing-sm) var(--spacing-md);
@@ -459,7 +470,8 @@
             font-size: 14px;
             font-weight: 600;
             box-shadow: var(--shadow-md);
-            z-index: 10;
+            margin-bottom: var(--spacing-md);
+            text-align: center;
         }
 
         /* ローディングスピナー */
@@ -504,7 +516,7 @@
         .highlight-background {
             background: linear-gradient(135deg, var(--success-color), var(--primary-light));
             color: white;
-            padding: var(--spacing-md);
+            padding: var(--spacing-lg);
             border-radius: var(--border-radius-sm);
             margin: var(--spacing-md) 0;
             text-align: center;
@@ -512,11 +524,11 @@
             box-shadow: var(--shadow-md);
             cursor: pointer;
             transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .highlight-background:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+        .highlight-background:active {
+            transform: scale(0.98);
         }
 
         .highlight-text {
@@ -532,7 +544,7 @@
             line-height: 1.6;
             text-align: center;
             background: linear-gradient(135deg, #f0fdf4, #dcfce7);
-            padding: var(--spacing-md);
+            padding: var(--spacing-lg);
             border-radius: var(--border-radius-sm);
             border-left: 4px solid var(--primary-color);
         }
@@ -543,16 +555,20 @@
             color: white;
             border: none;
             border-radius: var(--border-radius-sm);
-            padding: var(--spacing-sm) var(--spacing-md);
+            padding: var(--spacing-md) var(--spacing-lg);
             cursor: pointer;
             font-weight: 500;
             transition: all 0.3s ease;
             box-shadow: var(--shadow-sm);
+            min-height: var(--touch-target);
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
-        .edit-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+        .edit-button:active {
+            transform: scale(0.95);
         }
 
         /* 送信ボタン */
@@ -568,56 +584,15 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: var(--shadow-lg);
+            min-height: 56px;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
-        .submit-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        /* レスポンシブデザイン */
-        @media (max-width: 768px) {
-            body {
-                padding: var(--spacing-md);
-            }
-
-            .container {
-                padding: var(--spacing-lg);
-            }
-
-            h1 {
-                font-size: 24px;
-                margin: calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg)) var(--spacing-md);
-            }
-
-            .side-nav {
-                right: 0;
-                width: 45px;
-            }
-
-            .side-nav a {
-                width: 32px;
-                height: 32px;
-            }
-
-            .info-text {
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: var(--spacing-md);
-            }
-
-            h1 {
-                font-size: 20px;
-                padding: var(--spacing-md);
-            }
-
-            input, button {
-                font-size: 14px;
-            }
+        .submit-button:active {
+            transform: scale(0.98);
         }
 
         /* 追加のアニメーション */
@@ -637,7 +612,7 @@
 
         /* スクロールバーのスタイル */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
 
         ::-webkit-scrollbar-track {
@@ -646,11 +621,115 @@
 
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+        }
+
+        /* 超小画面用（iPhone SE等） */
+        @media (max-width: 375px) {
+            .container {
+                padding: var(--spacing-md);
+            }
+
+            h1 {
+                font-size: 20px;
+                padding: var(--spacing-md);
+            }
+
+            .calendar th,
+            .calendar td {
+                padding: var(--spacing-sm);
+                font-size: 12px;
+            }
+
+            .side-nav {
+                width: 48px;
+                bottom: 16px;
+                right: 16px;
+            }
+
+            .side-nav a {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        /* 横向き画面用 */
+        @media (orientation: landscape) and (max-height: 500px) {
+            body {
+                align-items: flex-start;
+                padding: var(--spacing-sm);
+            }
+
+            .container {
+                margin-bottom: 60px;
+            }
+
+            .side-nav {
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+
+        /* ダークモード対応 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-primary: #0f172a;
+                --background-secondary: #1e293b;
+                --text-primary: #e2e8f0;
+                --text-secondary: #cbd5e1;
+                --border-color: #334155;
+            }
+
+            body {
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            }
+
+            input[type="text"],
+            input[type="tel"],
+            input[type="email"],
+            input[type="datetime-local"],
+            textarea {
+                background: var(--background-secondary);
+                color: var(--text-primary);
+                border-color: var(--border-color);
+            }
+
+            .visit-buttons button,
+            .symptoms button,
+            .menu-sections button,
+            .irradiations button,
+            .options button {
+                background: var(--background-secondary);
+                color: var(--text-primary);
+                border-color: var(--border-color);
+            }
+        }
+
+        /* 高コントラスト対応 */
+        @media (prefers-contrast: high) {
+            :root {
+                --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+                --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.4);
+                --shadow-lg: 0 8px 16px -4px rgba(0, 0, 0, 0.5);
+                --shadow-xl: 0 16px 32px -8px rgba(0, 0, 0, 0.6);
+            }
+
+            button, input, textarea {
+                border-width: 3px;
+            }
+        }
+
+        /* 動きの制限設定 */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
