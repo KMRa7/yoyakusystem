@@ -765,9 +765,18 @@
         <div class="label" id="course">メニューをお選びください<span class="required">必須</span></div>
         <div class="info-text">※メニューを選択すると空き状況のカレンダーが表示されます</div>
         <div class="menu-sections">
-            <button type="button" onclick="showMenu('male')">ブライダルコース</button>
-            <button type="button" onclick="showMenu('female')">シェービングコース</button>
-            <button type="button" onclick="showMenu('whitening')">マッサージコース</button>
+            <button type="button" onclick="showMenu('thai')">タイ古式</button>
+            <button type="button" onclick="showMenu('facial')">フェイシャル</button>
+            <button type="button" onclick="showMenu('footcare')">フットケア</button>
+            <button type="button" onclick="showMenu('head')">頭・肩集中ほぐし</button>
+            <button type="button" onclick="showMenu('photovoltaic')">光燃焼ボディーサポート</button>
+            <button type="button" onclick="showMenu('brain')">ブレインセラピー</button>
+            <button type="button" onclick="showMenu('pulse')">EMM特殊電子パルス照射</button>
+            <button type="button" onclick="showMenu('health')">健康チェックTシステム</button>
+            <button type="button" onclick="showMenu('eyes')">Drアイズ</button>
+            <button type="button" onclick="showMenu('plasma')">Drプラズマ</button>
+            <button type="button" onclick="showMenu('hydrogen')">水素吸入</button>
+            <button type="button" onclick="showMenu('oxygen')">酸素吸入</button>
         </div>
 
 <!-- メニュー表示エリア（選択されたメニュー名がここに出る） -->
@@ -775,70 +784,161 @@
 
         <div id="treatment-text" style="display: none; margin-bottom: 10px;"></div>
 
-        <div id="male" class="menu-section">
+        <div id="thai" class="menu-section">
             <div class="highlight-background">
-                <span class="highlight-text">◆ブライダルコース◆</span>
+                <span class="highlight-text">◆タイ古式◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="ブライダルコース" data-price="15000">和装プラン〈30分〉</button>
-                <button type="button" onclick="selectSymptom(this)" data-category="ブライダルコース" data-price="15000">洋装プランA〈60分〉</button>
-                <button type="button" onclick="selectSymptom(this)" data-category="ブライダルコース" data-price="15000">洋装プランB〈120分〉</button>
-                <button type="button" onclick="selectSymptom(this)" data-category="ブライダルコース" data-price="15000">洋装プランC〈30分〉</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="タイ古式" data-price="15000">タイ古式 60分</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="タイ古式" data-price="15000">タイ古式 90分</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="タイ古式" data-price="15000">タイ古式+EMM基本コース 90分</button>
             </div>
             <div class="highlight-background">
-                <span class="highlight-text">ブライダルコース：オプション</span>
+                <span class="highlight-text">タイ古式：オプション</span>
             </div>
             <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">眉カット〈30分〉</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">ベーシックマッサージ</button>
-                <button type="button" id="sanirradiations" onclick="selectirradiations(this)" data-price="15000">リラックスマッサージ</button>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">首リンパ</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">頭皮ほぐし</button>
             </div>
         </div>
 
-        <div id="female" class="menu-section">
+        <div id="facial" class="menu-section">
             <div class="highlight-background">
-                <span class="highlight-text">◆シェービングコース◆</span>
+                <span class="highlight-text">◆フェイシャル◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="シェービングコース" data-price="15000">リラックスコース〈60分〉</button>
-                <button type="button" onclick="selectSymptom(this)" data-category="シェービングコース" data-price="15000">ベーシックコース〈30分〉</button>
-                <button type="button" onclick="selectSymptom(this)" data-category="シェービングコース" data-price="15000">スピードコース〈90分〉</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="フェイシャル" data-price="15000">ベーシックフェイシャル 60分</button>
             </div>
             <div class="highlight-background">
-                <span class="highlight-text">シェービングコース：オプション</span>
+                <span class="highlight-text">フェイシャル：オプション</span>
             </div>
             <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">眉カット〈30分〉</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">襟足〈30分〉</button>
-                <button type="button" id="sanirradiations" onclick="selectirradiations(this)" data-price="15000">背中</button>
-                <button type="button" id="yonirradiations" onclick="selectirradiations(this)" data-price="15000">背中(腰まで)〈30分〉</button>
-                <button type="button" id="goirradiations" onclick="selectirradiations(this)" data-price="15000">デコルテ〈30分〉</button>
-                <button type="button" id="rokuirradiations" onclick="selectirradiations(this)" data-price="15000">腕〈30分〉</button>
-                <button type="button" id="sitiirradiations" onclick="selectirradiations(this)" data-price="15000">保湿パック〈30分〉</button>
-                <button type="button" id="hatiirradiations" onclick="selectirradiations(this)" data-price="15000">美白パック〈30分〉</button>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">首リンパ</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">頭皮ほぐし</button>
+                <button type="button" id="sanirradiations" onclick="selectirradiations(this)" data-price="15000">足浴</button>
             </div>
         </div>
 
-        <div id="whitening" class="menu-section">
+        <div id="footcare" class="menu-section">
             <div class="highlight-background">
-                <span class="highlight-text">◆マッサージコース◆</span>
+                <span class="highlight-text">◆フットケア◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="マッサージコース" data-price="15000">リラックスマッサージ〈30分〉</button>
-                <button type="button" onclick="selectSymptom(this)" data-category="マッサージコース" data-price="15000">ベーシックマッサージ〈30分〉</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="フットケア" data-price="15000">フットケア 60分</button>
             </div>
             <div class="highlight-background">
-                <span class="highlight-text">マッサージコース：オプション</span>
+                <span class="highlight-text">フットケア：オプション</span>
             </div>
             <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">眉カット〈30分〉</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">襟足〈30分〉</button>
-                <button type="button" id="sanirradiations" onclick="selectirradiations(this)" data-price="15000">背中</button>
-                <button type="button" id="yonirradiations" onclick="selectirradiations(this)" data-price="15000">背中(腰まで)〈30分〉</button>
-                <button type="button" id="goirradiations" onclick="selectirradiations(this)" data-price="15000">デコルテ〈30分〉</button>
-                <button type="button" id="rokuirradiations" onclick="selectirradiations(this)" data-price="15000">腕〈30分〉</button>
-                <button type="button" id="sitiirradiations" onclick="selectirradiations(this)" data-price="15000">保湿パック〈30分〉</button>
-                <button type="button" id="hatiirradiations" onclick="selectirradiations(this)" data-price="15000">美白パック〈30分〉</button>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">首リンパ</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">頭皮ほぐし</button>
+            </div>
+        </div>
+
+        <div id="head" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆頭・肩集中ほぐし◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-category="頭・肩集中ほぐし" data-price="15000">頭・肩集中ほぐし 60分</button>
+            </div>
+            <div class="highlight-background">
+                <span class="highlight-text">頭・肩集中ほぐし：オプション</span>
+            </div>
+            <div class="irradiations">
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">首リンパ</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">頭皮ほぐし</button>
+                <button type="button" id="tenthirradiations" onclick="selectirradiations(this)" data-price="15000">足浴</button>
+            </div>
+        </div>
+
+        <div id="photovoltaic" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆光燃焼ボディーサポート◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-category="頭・肩集中ほぐし" data-price="15000">頭・肩集中ほぐし 60分</button>
+            </div>
+            <div class="highlight-background">
+                <span class="highlight-text">頭・肩集中ほぐし：オプション</span>
+            </div>
+            <div class="irradiations">
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">首リンパ</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">頭皮ほぐし</button>
+                <button type="button" id="tenthirradiations" onclick="selectirradiations(this)" data-price="15000">足浴</button>
+            </div>
+        </div>
+
+        <div id="brain" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆ブレインセラピー◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-category="ブレインセラピー" data-price="15000">ブレインセラピー 30分</button>
+            </div>
+        </div>
+
+        <div id="pulse" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆EMM特殊電子パルス照射◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-category="EMM特殊電子パルス照射" data-price="15000">EMM特殊電子パルス照射75分</button>
+            </div>
+            <div class="highlight-background">
+                <span class="highlight-text">EMM特殊電子パルス照射：オプション</span>
+            </div>
+            <div class="irradiations">
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">首リンパ</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">頭皮ほぐし</button>
+                <button type="button" id="tenthirradiations" onclick="selectirradiations(this)" data-price="15000">足浴</button>
+            </div>
+        </div>
+
+        <div id="health" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆健康チェックTシステム◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-category="頭・肩集中ほぐし" data-price="15000">健康チェックTシステム60分</button>
+            </div>
+        </div>
+
+        <div id="eyes" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆Drアイズ◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-category="Drアイズ" data-price="15000">Drアイズ45分</button>
+            </div>
+        </div>
+
+        <div id="plasma" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆Drプラズマ◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-category="Drプラズマ" data-price="15000">Drプラズマ30分</button>
+            </div>
+        </div>
+
+        <div id="hydrogen" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆水素吸入◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-category="水素吸入" data-price="15000">水素吸入60分</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="水素吸入" data-price="15000">水素吸入30分</button>
+            </div>
+        </div>
+
+        <div id="oxygen" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆酸素吸入◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-category="酸素吸入" data-price="15000">酸素吸入60分</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="酸素吸入" data-price="15000">酸素吸入30分</button>
             </div>
         </div>
 
@@ -930,28 +1030,30 @@
 
         // 訪問回数ごとの時間設定 (例：初めて=20分、2回目以降=15分)
         let irradiationsTimes = {
-            '眉カット〈30分〉': 30,
-            '襟足〈30分〉': 30,
-            '背中(キャミソールライン)〈30分〉': 30,
-            '背中(腰まで)〈30分〉': 30,
-            'デコルテ〈30分〉': 30,
-            '腕〈30分〉': 30,
-            '保湿パック〈30分〉': 30,
-            'ベーシックマッサージ(パック付き)〈30分〉': 30,
-            'リラックスマッサージの(パック付き)〈30分〉': 30,
-            '美白パック〈30分〉': 30
+            '首リンパ': 15,
+            '頭皮ほぐし': 10,
+            '足浴': 10
         };
 
         let selectedirradiationsTime = 0; // 訪問回数で選択された時間
 
         let menuTimes = {
-            '和装プラン〈30分〉': 30,
-            '洋装プランA〈60分〉': 60,
-            '洋装プランB〈120分〉': 420,
-            '洋装プランC〈30分〉': 30,
-            'リラックスコース〈60分〉': 60,
-            'ベーシックコース〈30分〉': 30,
-            'スピードコース〈90分〉': 90
+            'タイ古式 60分': 110,
+            'タイ古式 90分': 140,
+            'タイ古式+EMM基本コース 90分': 140,
+            'ベーシックフェイシャル 60分': 150,
+            'フットケア 60分': 110,
+            '頭・肩集中ほぐし 60分': 100,
+            '光燃焼ボディーサポート 80分': 140,
+            'ブレインセラピー 30分': 70,
+            'EMM特殊電子パルス照射75分': 120,
+            '健康チェックTシステム60分': 70,
+            'Drアイズ45分': 90,
+            'Drプラズマ30分': 70,
+            '水素吸入60分': 80,
+            '水素吸入30分': 50,
+            '酸素吸入60分': 80,
+            '酸素吸入30分': 50
         };
 
 
@@ -1392,7 +1494,7 @@ liff.sendMessages([{
                 return;
             }
 
-            const url = 'https://script.google.com/macros/s/AKfycbwCxnJaxGZ46c3TnnesuZcD_zuxuVoSHoDHo5MxkRzChcK5vZDwBs4HstzkXO-KLyuDYA/exec' +
+            const url = 'https://script.google.com/macros/s/AKfycbyF5qlTwdNqDiFkXoaB1g-0PQWnZrYgvIhqVoPeAAjvt7htWbe9t48s9aMStG-FmIfE/exec' +
                 `?startTime=${startTime.toISOString()}&endTime=${endTime.toISOString()}`;
 
             try {
@@ -1425,10 +1527,15 @@ liff.sendMessages([{
             const table = calendar.querySelector('table tbody');
 
             const times = [
-                '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
-                '12:00', '12:30', '13:00', '13:30',
-                '14:00', '14:30', '15:00', '15:30',
-                '16:00', '16:30', '17:00', '17:30',
+                '09:00', '09:15', '09:30', '09:45',
+                '10:00', '10:15', '10:30', '10:45',
+                '11:00', '11:15', '11:30', '11:45',
+                '12:00', '12:15', '12:30', '12:45',
+                '13:00', '13:15', '13:30', '13:45',
+                '14:00', '14:15', '14:30', '14:45',
+                '15:00', '15:15', '15:30', '15:45',
+                '16:00', '16:15', '16:30', '16:45',
+                '17:00', '17:15', '17:30', '17:45',
                 '18:00'
             ];
 
@@ -1506,7 +1613,7 @@ liff.sendMessages([{
                     }
 
                     // 18時以降に終了する予約を不可にする (17:30は可)
-                    if (slotEnd.getHours() === 18 && slotEnd.getMinutes() > 0) {
+                    /*if (slotEnd.getHours() === 18 && slotEnd.getMinutes() > 0) {
                         cell.textContent = '✕';
                         cell.classList.add('unavailable');
                         continue;
@@ -1514,7 +1621,7 @@ liff.sendMessages([{
                         cell.textContent = '✕';
                         cell.classList.add('unavailable');
                         continue;
-                    }
+                    }*/
 
                     // ここで終了時間を使った条件処理を行う
                     // 例えば、リアルタイムで既に過ぎた時間帯は×にする
@@ -1560,7 +1667,7 @@ liff.sendMessages([{
                         cell.classList.add('unavailable');
                     }
                     // 日曜日で、営業日ではない場合
-                    else if (slotStart.getDay() === 0 && !isBusinessDay && businessEventTimes.length === 0) {
+                    else if (slotStart.getDay() === 2 && !isBusinessDay && businessEventTimes.length === 0) {
                         cell.textContent = '✕';
                         cell.classList.add('unavailable');
                     }
@@ -1684,7 +1791,6 @@ liff.sendMessages([{
             // 現在の月を表示
             const currentMonthElement = document.getElementById('currentMonth');
             currentMonthElement.innerHTML = `<span class="year">${startDate.getFullYear()}年</span><br><span class="month">${startDate.getMonth() + 1}月</span>`;
-
         }
 
         function nextmonth() {
