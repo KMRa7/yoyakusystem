@@ -7,84 +7,30 @@
     <title>予約フォーム</title>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
-         :root {
-            --primary-color: #059669;
-            --primary-light: #10b981;
-            --primary-dark: #047857;
-            --secondary-color: #0d9488;
-            --accent-color: #65a30d;
-            --success-color: #16a34a;
-            --error-color: #dc2626;
-            --warning-color: #ca8a04;
-            --background-primary: #f0fdf4;
-            --background-secondary: #ffffff;
-            --text-primary: #14532d;
-            --text-secondary: #166534;
-            --text-light: #4ade80;
-            --border-color: #bbf7d0;
-            --shadow-sm: 0 2px 4px 0 rgba(5, 150, 105, 0.1);
-            --shadow-md: 0 4px 8px -2px rgba(5, 150, 105, 0.15), 0 2px 4px -1px rgba(5, 150, 105, 0.1);
-            --shadow-lg: 0 8px 16px -4px rgba(5, 150, 105, 0.2), 0 4px 8px -2px rgba(5, 150, 105, 0.1);
-            --shadow-xl: 0 16px 32px -8px rgba(5, 150, 105, 0.25), 0 8px 16px -4px rgba(5, 150, 105, 0.1);
-            --border-radius-sm: 8px;
-            --border-radius-md: 12px;
-            --border-radius-lg: 16px;
-            --spacing-xs: 6px;
-            --spacing-sm: 12px;
-            --spacing-md: 16px;
-            --spacing-lg: 24px;
-            --spacing-xl: 32px;
-            --touch-target: 44px; /* タッチターゲットの最小サイズ */
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: linear-gradient(135deg, #6ee7b7 0%, #34d399 50%, #10b981 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: var(--spacing-sm);
-            line-height: 1.6;
-            color: var(--text-primary);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* フローティングナビゲーション（スマホ用に調整） */
+        /* 右端の細いナビ（固定） */
         .side-nav {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            /* 画面スクロールしても固定 */
+            right: -5px;
+            /* さらに右へ */
+            top: 80%;
+            /* 画面中央に固定 */
+            transform: translateY(-50%) translateX(20px);
+            /* 中央配置と右ずらし */
+            background: #13ca5e;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: var(--spacing-xs);
-            border-radius: var(--border-radius-lg);
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-xl);
+            padding: 4px;
+            border-radius: 10px 0 0 10px;
             z-index: 1000;
-            width: 56px;
-            animation: slideInUp 0.8s ease-out;
+            width: 35px;
+            /* さらに細く */
         }
 
-        @keyframes slideInUp {
-            from {
-                transform: translateY(100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .side-nav a:active {
+            transform: scale(1.0);
+            /* タップした後に元のサイズに戻す */
         }
 
         .side-nav a {
@@ -95,642 +41,700 @@
             color: white;
             text-decoration: none;
             font-size: 10px;
-            margin: var(--spacing-xs) 0;
-            padding: var(--spacing-sm);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: var(--border-radius-sm);
-            width: var(--touch-target);
-            height: var(--touch-target);
+            margin: 5px 0;
+            padding: 5px;
+            transition: background 0.3s, transform 0.2s;
+            border-radius: 5px;
+            width: 30px;
+            height: 30px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .side-nav a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .side-nav a:hover::before,
-        .side-nav a:active::before {
-            opacity: 1;
-        }
-
-        .side-nav a:active {
-            transform: scale(0.95);
         }
 
         .side-nav a span {
-            font-size: 20px;
-        }
-
-        /* メインコンテナ */
-        .container {
-            background: var(--background-secondary);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-xl);
-            width: 100%;
-            max-width: 100%;
-            padding: var(--spacing-lg);
-            position: relative;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(16, 185, 129, 0.1);
-            animation: fadeInUp 0.8s ease-out;
-            margin-bottom: 80px; /* フローティングナビ用のスペース */
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ヘッダー */
-        h1 {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius-md);
-            text-align: center;
-            margin: calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg)) var(--spacing-lg);
             font-size: 24px;
+            /* 矢印をさらに大きく */
+            position: absolute;
+            left: -0px;
+            /* 左端に寄せる */
+            top: 13px;
+            /* さらに下へ */
+        }
+
+        /* スマホ用の微調整 */
+        @media (max-width: 600px) {
+            .side-nav {
+                right: 2px;
+                /* スマホではさらに右端に */
+                width: 30px;
+                /* もっと細く */
+            }
+
+            .side-nav a {
+                width: 28px;
+                height: 28px;
+            }
+
+            .side-nav a i {
+                font-size: 12px;
+                /* スマホではもっと小さく */
+            }
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e7e7e7;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding-top: 5px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background-color: #fdfdfd;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            padding: 25px;
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+
+        h1 {
+            background: linear-gradient(135deg, #13ca5e, #0fa958);
+            color: white;
+            padding: 20px;
+            border-radius: 0 15px 0px 45px;
+            text-align: center;
+            display: block;
+            margin: -20px -15px 20px -15px;
+            font-size: 26px;
             font-weight: 600;
-            box-shadow: var(--shadow-lg);
+            box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.05);
             position: relative;
             overflow: hidden;
         }
 
-        h1::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* ラベル */
         .label {
             display: block;
-            margin-bottom: var(--spacing-md);
-            padding: var(--spacing-md) var(--spacing-lg);
+            margin-bottom: 10px;
+            padding: 3px;
             font-weight: 600;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            background-color: #13ca5e;
             color: white;
-            border-radius: var(--border-radius-sm);
-            font-size: 16px;
+            border-radius: 6px;
+            font-size: 18px;
             text-align: center;
+            /* 中央揃え */
+            text-indent: 20px;
+            /* テキストを右に20pxずらす */
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .label:active {
-            transform: translateY(1px);
         }
 
         .labelContent {
             display: block;
-            margin-bottom: var(--spacing-md);
-            padding: var(--spacing-md) var(--spacing-lg);
+            margin-bottom: 10px;
+            padding: 3px;
             font-weight: 600;
-            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            background-color: #13ca5e;
             color: white;
-            border-radius: var(--border-radius-sm);
-            font-size: 16px;
+            border-radius: 6px;
+            font-size: 18px;
             text-align: center;
+            /* 中央揃え */
+            text-indent: 0px;
+            /* テキストを右に20pxずらす */
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        .labelContent:active {
-            transform: translateY(1px);
-        }
-
-        /* 必須マーク */
+        /* 必須マークのスタイル */
         .required {
-            background: linear-gradient(135deg, var(--error-color), #dc2626);
-            color: white;
-            font-weight: 500;
-            font-size: 0.75em;
-            padding: 4px 8px;
-            border-radius: 6px;
-            margin-left: var(--spacing-sm);
-            vertical-align: middle;
-            box-shadow: var(--shadow-sm);
-            animation: pulse 2s infinite;
+            color: red;
+            font-weight: bold;
+            margin-left: 5px;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+        .required-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            color: #13ca5e;
+            font-weight: bold;
+            font-size: 0.9em;
+            border-radius: 4px;
+            padding: 2px 6px;
+            border: 2px solid #13ca5e;
         }
 
-        /* フォーム要素 */
         input[type="text"],
         input[type="tel"],
-        input[type="email"],
-        input[type="datetime-local"],
         textarea {
             width: 100%;
-            padding: var(--spacing-lg);
-            margin-bottom: var(--spacing-lg);
-            border: 2px solid var(--border-color);
-            border-radius: var(--border-radius-sm);
-            font-size: 16px; /* iOSのズームを防ぐ */
-            font-family: inherit;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: var(--background-secondary);
-            color: var(--text-primary);
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            min-height: var(--touch-target);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
 
-        input:focus,
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        /* ボタン群 */
         .visit-buttons,
         .symptoms,
         .menu-sections,
-        .irradiations,
-        .options {
+        .irradiations {
             display: flex;
-            flex-direction: column;
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
         .visit-buttons button,
         .symptoms button,
         .menu-sections button,
-        .irradiations button,
-        .options button {
-            width: 100%;
-            padding: var(--spacing-lg);
-            border: 2px solid var(--border-color);
-            border-radius: var(--border-radius-sm);
-            background: var(--background-secondary);
-            color: var(--text-primary);
+        .irradiations button {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f7f7f7;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            min-height: var(--touch-target);
-            -webkit-tap-highlight-color: transparent;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        .visit-buttons button::before,
-        .symptoms button::before,
-        .menu-sections button::before,
-        .irradiations button::before,
-        .options button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.15), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .visit-buttons button:active::before,
-        .symptoms button:active::before,
-        .menu-sections button:active::before,
-        .irradiations button:active::before,
-        .options button:active::before {
-            left: 100%;
-        }
-
-        .visit-buttons button:active,
-        .symptoms button:active,
-        .menu-sections button:active,
-        .irradiations button:active,
-        .options button:active {
-            transform: scale(0.98);
+            box-sizing: border-box;
+            text-align: center;
+            white-space: nowrap;
         }
 
         .visit-buttons button.active,
         .symptoms button.active,
         .menu-sections button.active,
-        .irradiations button.active,
-        .options button.active {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            border-color: var(--primary-color);
-            box-shadow: var(--shadow-lg);
+        .irradiations button.active {
+            background-color: #444;
+            color: #fff;
         }
 
-        /* カレンダー */
+        .date-inputs input[type="datetime-local"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #ff4c4c;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
         .calendar-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: var(--spacing-lg);
+            justify-content: center;
+            margin-bottom: 20px;
             position: relative;
+            width: 100%;
         }
 
         .calendar {
-            width: 100%;
-            background: var(--background-secondary);
-            border: 2px solid var(--border-color);
-            border-radius: var(--border-radius-md);
-            box-shadow: var(--shadow-lg);
+            flex: 1;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            width: 100%;
         }
 
         .calendar table {
             width: 100%;
             border-collapse: collapse;
+            table-layout: fixed;
+            /* セル幅を均等にする */
         }
 
         .calendar th,
         .calendar td {
-            padding: var(--spacing-md);
+            font-size: 12.5px;
+            /* ここでフォントサイズを変更 */
             text-align: center;
-            border: 1px solid var(--border-color);
-            font-size: 14px;
+            padding: 5px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            min-height: var(--touch-target);
-            -webkit-tap-highlight-color: transparent;
+            vertical-align: top;
+            width: auto;
+            /* 通常のセルは自動調整 */
+            box-sizing: border-box;
+            border: 2px solid #696969;
+        }
+
+        .calendar th:first-child,
+        .calendar td:first-child {
+            width: 17%;
+            /* ここで時間列の幅を調整 */
+            font-size: 12.5px;
+            /* フォントサイズを変更 */
         }
 
         .calendar th {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            font-weight: 600;
+            background-color: #f7f7f7;
         }
 
-        .calendar td:active {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            transform: scale(0.95);
+        .calendar td:hover {
+            background-color: #ddd;
         }
 
         .calendar td.selected {
-            background: linear-gradient(135deg, var(--success-color), var(--primary-light));
-            color: white;
-            box-shadow: inset 0 0 0 2px white;
+            background-color: #13ca5e;
+            color: #fff;
         }
 
-        .available {
-            color: var(--success-color);
-            font-weight: 600;
-        }
+        .week-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
 
-        .unavailable {
-            background-color: #f0fdf4;
-            color: var(--text-light);
-            cursor: not-allowed;
-        }
+.week-button {
+    padding: 10px 20px;
+    background-color: #444444;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    transform-origin: center center;
+}
 
-        /* ナビゲーションボタン */
-        .week-button-container,
+.week-button:hover {
+    background-color: #444444;
+    transform: scale(1.15); /* ドーン！ってくらい拡大🔥 */
+}
+
+.week-button:active {
+    transform: scale(0.95); /* クリックした瞬間にギュッと縮む💥 */
+}
+
         .month-button-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-bottom: var(--spacing-md);
-            gap: var(--spacing-md);
+            margin-bottom: 10px;
         }
 
-        .week-button,
         .month-button {
-            padding: var(--spacing-md) var(--spacing-lg);
-            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
-            color: white;
+            padding: 10px 20px;
+            background-color: #444;
+            color: #fff;
             border: none;
-            border-radius: var(--border-radius-sm);
+            border-radius: 4px;
             cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
-            flex: 1;
-            min-height: var(--touch-target);
-            -webkit-tap-highlight-color: transparent;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
         }
 
-        .week-button:active,
-        .month-button:active {
-            transform: scale(0.95);
-        }
+        .month-button:hover {
+    background-color: #444444;
+    transform: scale(1.15); /* ドーン！ってくらい拡大🔥 */
+}
 
+.month-button:active {
+    transform: scale(0.95); /* クリックした瞬間にギュッと縮む💥 */
+}
         .current-month {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--border-radius-sm);
-            font-size: 14px;
-            font-weight: 600;
-            box-shadow: var(--shadow-md);
-            margin-bottom: var(--spacing-md);
-            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #444;
+            margin-top: 20px;
+            /* 下にずらす */
+            display: inline-block;
+            /* margin-top を適用しやすくする */
         }
 
-        /* ローディングスピナー */
         .loading-spinner {
             position: fixed;
+            /* 画面全体に対応 */
             top: 50%;
+            /* 縦中央 */
             left: 50%;
+            /* 横中央 */
             transform: translate(-50%, -50%);
             display: none;
+            /* 初期状態は非表示 */
             text-align: center;
-            background: rgba(5, 150, 105, 0.9);
-            backdrop-filter: blur(10px);
-            padding: var(--spacing-xl);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow-xl);
-            z-index: 9999;
+            background-color: rgba(0, 0, 0, 0.6);
+            /* 半透明の黒背景で注目度アップ */
+            padding: 40px;
+            /* 周囲に余白をつける */
+            border-radius: 10px;
+            /* 角丸で柔らかい印象 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            /* 少し立体感を追加 */
         }
 
         .spinner {
             width: 60px;
+            /* スピナーをさらに大きく */
             height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.2);
-            border-top-color: white;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            /* 薄い白で枠を柔らかく */
+            border-top-color: #00d1ff;
+            /* 明るい青で目立たせる */
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+            /* 丸い形状 */
+            animation: spin 0.7s linear infinite;
+            /* 滑らかで速い回転 */
+            margin-left: 12px;
+            /* スピナーを右にずらす */
         }
 
         .loading-text {
-            margin-top: var(--spacing-md);
-            font-size: 16px;
-            font-weight: 600;
-            color: white;
-            letter-spacing: 0.5px;
-        }
-
-        /* ハイライト要素 */
-        .highlight-background {
-            background: linear-gradient(135deg, var(--success-color), var(--primary-light));
-            color: white;
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius-sm);
-            margin: var(--spacing-md) 0;
+            margin-top: 20px;
+            /* スピナーとテキストの間隔 */
+            font-size: 15px;
+            /* さらに大きなフォントサイズ */
+            font-weight: bold;
+            /* 太字で目立たせる */
+            color: #ffffff;
+            /* 純白で高いコントラスト */
+            letter-spacing: 1px;
+            /* 文字間隔を広げてモダンな印象に */
             text-align: center;
-            font-weight: 600;
-            box-shadow: var(--shadow-md);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            -webkit-tap-highlight-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            /* テキストに影をつけて視認性アップ */
         }
 
-        .highlight-background:active {
-            transform: scale(0.98);
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
 
-        .highlight-text {
-            font-weight: 600;
-            color: inherit;
+        .available {
+            color: red;
         }
 
-        /* 情報テキスト */
-        .info-text {
-            margin: var(--spacing-lg) 0;
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            text-align: center;
-            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius-sm);
-            border-left: 4px solid var(--primary-color);
+        .unavailable {
+            background-color: #d3d3d3;
         }
 
-        /* 編集ボタン */
-        .edit-button {
-            background: linear-gradient(135deg, var(--warning-color), #eab308);
-            color: white;
-            border: none;
-            border-radius: var(--border-radius-sm);
-            padding: var(--spacing-md) var(--spacing-lg);
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
-            min-height: var(--touch-target);
-            -webkit-tap-highlight-color: transparent;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        .edit-button:active {
-            transform: scale(0.95);
-        }
-
-        /* 送信ボタン */
-        .submit-button {
-            width: 100%;
-            padding: var(--spacing-lg);
-            border: none;
-            border-radius: var(--border-radius-sm);
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-lg);
-            min-height: 56px;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        .submit-button:active {
-            transform: scale(0.98);
-        }
-
-        /* 追加のアニメーション */
         .menu-section {
             display: none;
-            animation: fadeIn 0.5s ease-out;
         }
 
         .menu-section.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        #repairLabel,
+        #repairButtons {
+            display: none;
         }
 
-        /* スクロールバーのスタイル */
-        ::-webkit-scrollbar {
-            width: 6px;
+        #treatment-text {
+            background-color: #eef9f5;
+            padding: 0px;
+            border-radius: 0px;
+            margin-top: 0px;
         }
 
-        ::-webkit-scrollbar-track {
-            background: var(--background-primary);
+        .highlight-background {
+            background-color: #f9f9d6;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            margin-top: 10px;
+            /* 上に余白を追加 */
+            text-align: center;
+            /* コンテナ内の要素を中央に配置 */
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            border-radius: 3px;
+        .highlight-text {
+            display: block;
+            font-weight: bold;
+            text-align: center;
+            /* テキストを中央揃えにする */
         }
 
-        /*::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
-        }*/
+        .red-circle {
+            color: red;
+            /* 赤色に設定 */
+        }
 
-        /* 超小画面用（iPhone SE等） */
-        @media (max-width: 375px) {
+        .bold-cross {
+            font-weight: bold;
+            /* 太文字に設定 */
+        }
+
+        .info-text {
+            margin-top: 20px;
+            /* 上の余白 */
+            margin-bottom: 10px;
+            /* 下に白い隙間を追加 */
+            font-size: 13px;
+            color: #000000;
+            line-height: 1.5;
+            text-align: center;
+            word-wrap: break-word;
+            background-color: #eef9f5;
+            /* 青っぽい背景色を追加 */
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        /* 携帯端末向けのレスポンシブデザイン */
+        @media (max-width: 768px) {
+            .info-text {
+                font-size: 11.5px;
+                /* スマホでは少し小さく */
+                margin-top: 10px;
+                /* 上下のマージンを調整 */
+                line-height: 2.0;
+                /* テキストの高さ調整 */
+            }
+        }
+
+        .symptoms,
+        .options {
+            display: block;
+            /* ボタンを縦並びに */
+        }
+
+        .symptoms button,
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f7f7f7;
+            cursor: pointer;
+            box-sizing: border-box;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .symptoms button.active,
+        .options button.active {
+            background-color: #444;
+            color: #fff;
+        }
+
+        .highlight-background {
+            cursor: pointer;
+            background-color: #13ca5e;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .symptoms,
+        .options {
+            display: block;
+            /* ボタンを縦並びに */
+        }
+
+        .highlight-text {
+            font-weight: bold;
+            display: inline-block;
+            color: #fff;
+            /* オプションテキストの色 */
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: -5px 0;
+        }
+
+        hr {
+            margin: -5px 0;
+        }
+
+        .edit-button {
+            background-color: #ff6b6b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+            /* 改行を防ぐ */
+            width: 80px;
+            /* 横幅を固定 */
+            text-align: center;
+            /* テキストを中央揃え */
+        }
+
+        .edit-button:hover {
+            background-color: #ff4f4f;
+        }
+
+
+        /* 100点の予約フォームCSS */
+
+        input:focus,
+        textarea:focus {
+            border-color: #13ca5e;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+        }
+
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background-color: #13ca5e;
+            color: #000000;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background-color: #e9e9e9;
+            transform: scale(1.05);
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            background-color: #dc3545;
+        }
+
+        .submit-button:hover {
+            background-color: #c82333;
+        }
+
+        @media (max-width: 768px) {
             .container {
-                padding: var(--spacing-md);
+                padding: 15px;
             }
 
             h1 {
-                font-size: 20px;
-                padding: var(--spacing-md);
+                font-size: 22px;
             }
 
-            .calendar th,
-            .calendar td {
-                padding: var(--spacing-sm);
-                font-size: 12px;
-            }
-
-            .side-nav {
-                width: 48px;
-                bottom: 16px;
-                right: 16px;
-            }
-
-            .side-nav a {
-                width: 36px;
-                height: 36px;
+            input,
+            button {
+                font-size: 14px;
             }
         }
 
-        /* 横向き画面用 */
-        @media (orientation: landscape) and (max-height: 500px) {
-            body {
-                align-items: flex-start;
-                padding: var(--spacing-sm);
-            }
-
-            .container {
-                margin-bottom: 60px;
-            }
-
-            .side-nav {
-                bottom: 10px;
-                right: 10px;
-            }
+        button.active {
+            outline: 2px solid #696969;
+            /* ここで枠線を指定 */
+            outline-offset: 2px;
         }
 
-        /* ダークモード対応 */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --background-primary: #0f172a;
-                --background-secondary: #1e293b;
-                --text-primary: #e2e8f0;
-                --text-secondary: #cbd5e1;
-                --border-color: #334155;
-            }
+        /* 必須マークのスタイル */
+        .required {
+            color: #ffffff;
+            /* ゴールド（黄色） */
+            font-weight: lighter;
+            /* 文字を細くする */
+            font-size: 0.6em;
+            margin-left: 5px;
+            vertical-align: 0.8em;
+            /* 位置を少し上に調整 */
 
-            body {
-                background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-            }
-
-            input[type="text"],
-            input[type="tel"],
-            input[type="email"],
-            input[type="datetime-local"],
-            textarea {
-                background: var(--background-secondary);
-                color: var(--text-primary);
-                border-color: var(--border-color);
-            }
-
-            .visit-buttons button,
-            .symptoms button,
-            .menu-sections button,
-            .irradiations button,
-            .options button {
-                background: var(--background-secondary);
-                color: var(--text-primary);
-                border-color: var(--border-color);
-            }
+            /* 白色背景の四角形 */
+            background-color: rgb(255, 15, 15);
+            padding: 0 5px;
+            border-radius: 3px;
+            margin-right: 5px;
         }
 
-        /* 高コントラスト対応 */
-        @media (prefers-contrast: high) {
-            :root {
-                --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-                --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.4);
-                --shadow-lg: 0 8px 16px -4px rgba(0, 0, 0, 0.5);
-                --shadow-xl: 0 16px 32px -8px rgba(0, 0, 0, 0.6);
-            }
-
-            button, input, textarea {
-                border-width: 3px;
-            }
+        .current-month {
+            text-align: center;
+            display: block;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -10px);
+            /* Y方向に上げる */
+            background-color: #13ca5e;
+            color: #fff;
+            padding: 3px 12px;
+            /* ボックスのパディングを縮小 */
+            border-radius: 8px;
+            /* 角の丸みを少し減少 */
+            font-size: 1.4rem;
+            /* フォントサイズを小さく */
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(47, 103, 167, 0.2);
+            /* 影も控えめに */
         }
 
-        /* 動きの制限設定 */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
+        /* ナビゲーションバー */
+        .sidebar {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1e1e2d;
+            padding: 10px;
+            border-radius: 10px 0 0 10px;
+            z-index: 1000;
         }
+
+        .sidebar a {
+            display: block;
+            padding: 15px;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 10px;
+            background: #4a90e2;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: #357ac4;
+        }
+
+        /* スクロール用のセクション */
+        .section {
+            padding: 50px 10px;
+            margin-top: 30px;
+        }
+
+#selected-menus-display {
+  display: none; /* 最初は非表示 */
+  font-weight: bold;
+  margin-top: 12px;
+  padding: 12px 16px;
+  background-color: #f5f5f5;
+  border-left: 4px solid #4caf50;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  word-break: break-word;
+}
     </style>
 </head>
 
@@ -761,18 +765,9 @@
         <div class="label" id="course">メニューをお選びください<span class="required">必須</span></div>
         <div class="info-text">※メニューを選択すると空き状況のカレンダーが表示されます</div>
         <div class="menu-sections">
-            <button type="button" onclick="showMenu('thai')">タイ古式</button>
-            <button type="button" onclick="showMenu('facial')">フェイシャル</button>
-            <button type="button" onclick="showMenu('footcare')">フットケア</button>
-            <button type="button" onclick="showMenu('head')">頭・肩集中ほぐし</button>
-            <button type="button" onclick="showMenu('photovoltaic')">光燃焼ボディーサポート</button>
-            <button type="button" onclick="showMenu('brain')">ブレインセラピー</button>
-            <button type="button" onclick="showMenu('pulse')">EMM特殊電子パルス照射</button>
-            <button type="button" onclick="showMenu('health')">健康チェックTシステム</button>
-            <button type="button" onclick="showMenu('eyes')">Drアイズ</button>
-            <button type="button" onclick="showMenu('plasma')">Drプラズマ</button>
-            <button type="button" onclick="showMenu('hydrogen')">水素吸入</button>
-            <button type="button" onclick="showMenu('oxygen')">酸素吸入</button>
+            <button type="button" onclick="showMenu('male')">ブライダルコース</button>
+            <button type="button" onclick="showMenu('female')">シェービングコース</button>
+            <button type="button" onclick="showMenu('whitening')">マッサージコース</button>
         </div>
 
 <!-- メニュー表示エリア（選択されたメニュー名がここに出る） -->
@@ -780,161 +775,70 @@
 
         <div id="treatment-text" style="display: none; margin-bottom: 10px;"></div>
 
-        <div id="thai" class="menu-section">
+        <div id="male" class="menu-section">
             <div class="highlight-background">
-                <span class="highlight-text">◆タイ古式◆</span>
+                <span class="highlight-text">◆ブライダルコース◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="タイ古式" data-price="15000">タイ古式 60分</button>
-                <button type="button" onclick="selectSymptom(this)" data-category="タイ古式" data-price="15000">タイ古式 90分</button>
-                <button type="button" onclick="selectSymptom(this)" data-category="タイ古式" data-price="15000">タイ古式+EMM基本コース 90分</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="ブライダルコース" data-price="15000">和装プラン〈30分〉</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="ブライダルコース" data-price="15000">洋装プランA〈60分〉</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="ブライダルコース" data-price="15000">洋装プランB〈120分〉</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="ブライダルコース" data-price="15000">洋装プランC〈30分〉</button>
             </div>
             <div class="highlight-background">
-                <span class="highlight-text">タイ古式：オプション</span>
+                <span class="highlight-text">ブライダルコース：オプション</span>
             </div>
             <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">首リンパ</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">頭皮ほぐし</button>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">眉カット〈30分〉</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">ベーシックマッサージ</button>
+                <button type="button" id="sanirradiations" onclick="selectirradiations(this)" data-price="15000">リラックスマッサージ</button>
             </div>
         </div>
 
-        <div id="facial" class="menu-section">
+        <div id="female" class="menu-section">
             <div class="highlight-background">
-                <span class="highlight-text">◆フェイシャル◆</span>
+                <span class="highlight-text">◆シェービングコース◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="フェイシャル" data-price="15000">ベーシックフェイシャル 60分</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="シェービングコース" data-price="15000">リラックスコース〈60分〉</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="シェービングコース" data-price="15000">ベーシックコース〈30分〉</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="シェービングコース" data-price="15000">スピードコース〈90分〉</button>
             </div>
             <div class="highlight-background">
-                <span class="highlight-text">フェイシャル：オプション</span>
+                <span class="highlight-text">シェービングコース：オプション</span>
             </div>
             <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">首リンパ</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">頭皮ほぐし</button>
-                <button type="button" id="sanirradiations" onclick="selectirradiations(this)" data-price="15000">足浴</button>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">眉カット〈30分〉</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">襟足〈30分〉</button>
+                <button type="button" id="sanirradiations" onclick="selectirradiations(this)" data-price="15000">背中</button>
+                <button type="button" id="yonirradiations" onclick="selectirradiations(this)" data-price="15000">背中(腰まで)〈30分〉</button>
+                <button type="button" id="goirradiations" onclick="selectirradiations(this)" data-price="15000">デコルテ〈30分〉</button>
+                <button type="button" id="rokuirradiations" onclick="selectirradiations(this)" data-price="15000">腕〈30分〉</button>
+                <button type="button" id="sitiirradiations" onclick="selectirradiations(this)" data-price="15000">保湿パック〈30分〉</button>
+                <button type="button" id="hatiirradiations" onclick="selectirradiations(this)" data-price="15000">美白パック〈30分〉</button>
             </div>
         </div>
 
-        <div id="footcare" class="menu-section">
+        <div id="whitening" class="menu-section">
             <div class="highlight-background">
-                <span class="highlight-text">◆フットケア◆</span>
+                <span class="highlight-text">◆マッサージコース◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="フットケア" data-price="15000">フットケア 60分</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="マッサージコース" data-price="15000">リラックスマッサージ〈30分〉</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="マッサージコース" data-price="15000">ベーシックマッサージ〈30分〉</button>
             </div>
             <div class="highlight-background">
-                <span class="highlight-text">フットケア：オプション</span>
+                <span class="highlight-text">マッサージコース：オプション</span>
             </div>
             <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">首リンパ</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">頭皮ほぐし</button>
-            </div>
-        </div>
-
-        <div id="head" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆頭・肩集中ほぐし◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="頭・肩集中ほぐし" data-price="15000">頭・肩集中ほぐし 60分</button>
-            </div>
-            <div class="highlight-background">
-                <span class="highlight-text">頭・肩集中ほぐし：オプション</span>
-            </div>
-            <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">首リンパ</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">頭皮ほぐし</button>
-                <button type="button" id="tenthirradiations" onclick="selectirradiations(this)" data-price="15000">足浴</button>
-            </div>
-        </div>
-
-        <div id="photovoltaic" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆光燃焼ボディーサポート◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="頭・肩集中ほぐし" data-price="15000">頭・肩集中ほぐし 60分</button>
-            </div>
-            <div class="highlight-background">
-                <span class="highlight-text">頭・肩集中ほぐし：オプション</span>
-            </div>
-            <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">首リンパ</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">頭皮ほぐし</button>
-                <button type="button" id="tenthirradiations" onclick="selectirradiations(this)" data-price="15000">足浴</button>
-            </div>
-        </div>
-
-        <div id="brain" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆ブレインセラピー◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="ブレインセラピー" data-price="15000">ブレインセラピー 30分</button>
-            </div>
-        </div>
-
-        <div id="pulse" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆EMM特殊電子パルス照射◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="EMM特殊電子パルス照射" data-price="15000">EMM特殊電子パルス照射75分</button>
-            </div>
-            <div class="highlight-background">
-                <span class="highlight-text">EMM特殊電子パルス照射：オプション</span>
-            </div>
-            <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">首リンパ</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">頭皮ほぐし</button>
-                <button type="button" id="tenthirradiations" onclick="selectirradiations(this)" data-price="15000">足浴</button>
-            </div>
-        </div>
-
-        <div id="health" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆健康チェックTシステム◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="頭・肩集中ほぐし" data-price="15000">健康チェックTシステム60分</button>
-            </div>
-        </div>
-
-        <div id="eyes" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆Drアイズ◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="Drアイズ" data-price="15000">Drアイズ45分</button>
-            </div>
-        </div>
-
-        <div id="plasma" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆Drプラズマ◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="Drプラズマ" data-price="15000">Drプラズマ30分</button>
-            </div>
-        </div>
-
-        <div id="hydrogen" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆水素吸入◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="水素吸入" data-price="15000">水素吸入60分</button>
-                <button type="button" onclick="selectSymptom(this)" data-category="水素吸入" data-price="15000">水素吸入30分</button>
-            </div>
-        </div>
-
-        <div id="oxygen" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆酸素吸入◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="酸素吸入" data-price="15000">水素吸入60分</button>
-                <button type="button" onclick="selectSymptom(this)" data-category="酸素吸入" data-price="15000">水素吸入30分</button>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">眉カット〈30分〉</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">襟足〈30分〉</button>
+                <button type="button" id="sanirradiations" onclick="selectirradiations(this)" data-price="15000">背中</button>
+                <button type="button" id="yonirradiations" onclick="selectirradiations(this)" data-price="15000">背中(腰まで)〈30分〉</button>
+                <button type="button" id="goirradiations" onclick="selectirradiations(this)" data-price="15000">デコルテ〈30分〉</button>
+                <button type="button" id="rokuirradiations" onclick="selectirradiations(this)" data-price="15000">腕〈30分〉</button>
+                <button type="button" id="sitiirradiations" onclick="selectirradiations(this)" data-price="15000">保湿パック〈30分〉</button>
+                <button type="button" id="hatiirradiations" onclick="selectirradiations(this)" data-price="15000">美白パック〈30分〉</button>
             </div>
         </div>
 
@@ -1026,30 +930,28 @@
 
         // 訪問回数ごとの時間設定 (例：初めて=20分、2回目以降=15分)
         let irradiationsTimes = {
-            '首リンパ': 15,
-            '頭皮ほぐし': 10,
-            '足浴': 10
+            '眉カット〈30分〉': 30,
+            '襟足〈30分〉': 30,
+            '背中(キャミソールライン)〈30分〉': 30,
+            '背中(腰まで)〈30分〉': 30,
+            'デコルテ〈30分〉': 30,
+            '腕〈30分〉': 30,
+            '保湿パック〈30分〉': 30,
+            'ベーシックマッサージ(パック付き)〈30分〉': 30,
+            'リラックスマッサージの(パック付き)〈30分〉': 30,
+            '美白パック〈30分〉': 30
         };
 
         let selectedirradiationsTime = 0; // 訪問回数で選択された時間
 
         let menuTimes = {
-            'タイ古式 60分': 110,
-            'タイ古式 90分': 140,
-            'タイ古式+EMM基本コース 90分': 140,
-            'ベーシックフェイシャル 60分': 150,
-            'フットケア 60分': 110,
-            '頭・肩集中ほぐし 60分': 100,
-            '光燃焼ボディーサポート 80分': 140,
-            'ブレインセラピー 30分': 70,
-            'EMM特殊電子パルス照射75分': 120,
-            '健康チェックTシステム60分': 70,
-            'Drアイズ45分': 90,
-            'Drプラズマ30分': 70,
-            '水素吸入60分': 80,
-            '水素吸入30分': 50,
-            '酸素吸入60分': 80,
-            '酸素吸入30分': 50
+            '和装プラン〈30分〉': 30,
+            '洋装プランA〈60分〉': 60,
+            '洋装プランB〈120分〉': 420,
+            '洋装プランC〈30分〉': 30,
+            'リラックスコース〈60分〉': 60,
+            'ベーシックコース〈30分〉': 30,
+            'スピードコース〈90分〉': 90
         };
 
 
@@ -1490,7 +1392,7 @@ liff.sendMessages([{
                 return;
             }
 
-            const url = 'https://script.google.com/macros/s/AKfycbyF5qlTwdNqDiFkXoaB1g-0PQWnZrYgvIhqVoPeAAjvt7htWbe9t48s9aMStG-FmIfE/exec' +
+            const url = 'https://script.google.com/macros/s/AKfycbwCxnJaxGZ46c3TnnesuZcD_zuxuVoSHoDHo5MxkRzChcK5vZDwBs4HstzkXO-KLyuDYA/exec' +
                 `?startTime=${startTime.toISOString()}&endTime=${endTime.toISOString()}`;
 
             try {
@@ -1523,15 +1425,10 @@ liff.sendMessages([{
             const table = calendar.querySelector('table tbody');
 
             const times = [
-                '09:00', '09:15', '09:30', '09:45',
-                '10:00', '10:15', '10:30', '10:45',
-                '11:00', '11:15', '11:30', '11:45',
-                '12:00', '12:15', '12:30', '12:45',
-                '13:00', '13:15', '13:30', '13:45',
-                '14:00', '14:15', '14:30', '14:45',
-                '15:00', '15:15', '15:30', '15:45',
-                '16:00', '16:15', '16:30', '16:45',
-                '17:00', '17:15', '17:30', '17:45',
+                '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
+                '12:00', '12:30', '13:00', '13:30',
+                '14:00', '14:30', '15:00', '15:30',
+                '16:00', '16:30', '17:00', '17:30',
                 '18:00'
             ];
 
@@ -1609,7 +1506,7 @@ liff.sendMessages([{
                     }
 
                     // 18時以降に終了する予約を不可にする (17:30は可)
-                    /*if (slotEnd.getHours() === 18 && slotEnd.getMinutes() > 0) {
+                    if (slotEnd.getHours() === 18 && slotEnd.getMinutes() > 0) {
                         cell.textContent = '✕';
                         cell.classList.add('unavailable');
                         continue;
@@ -1617,7 +1514,7 @@ liff.sendMessages([{
                         cell.textContent = '✕';
                         cell.classList.add('unavailable');
                         continue;
-                    }*/
+                    }
 
                     // ここで終了時間を使った条件処理を行う
                     // 例えば、リアルタイムで既に過ぎた時間帯は×にする
@@ -1663,7 +1560,7 @@ liff.sendMessages([{
                         cell.classList.add('unavailable');
                     }
                     // 日曜日で、営業日ではない場合
-                    else if (slotStart.getDay() === 2 && !isBusinessDay && businessEventTimes.length === 0) {
+                    else if (slotStart.getDay() === 0 && !isBusinessDay && businessEventTimes.length === 0) {
                         cell.textContent = '✕';
                         cell.classList.add('unavailable');
                     }
