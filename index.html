@@ -1669,7 +1669,7 @@ liff.sendMessages([{
                     // 日曜日で、営業日ではない場合
                     // 日曜日の営業時間制限（14時から18時まで）
                     else if (slotStart.getDay() === 0) {
-                        if (slotStart.getHours() < 14 || slotStart.getHours() >= 18) {
+                        if (slotStart.getHours() < 14 || slotStart.getHours() > 18) {
                             cell.textContent = '✕';
                             cell.classList.add('unavailable');
                         } else if (isBusinessDay && count === 0) {
