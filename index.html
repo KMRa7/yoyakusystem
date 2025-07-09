@@ -47,7 +47,6 @@
             <button type="button" onclick="showMenu('whitening')">マッサージコース</button>
         </div>
 
-        <!-- treatment-textをボタンの下に移動 -->
         <div id="treatment-text" style="display: none; margin-bottom: 10px;"></div>
 
         <div id="male" class="menu-section">
@@ -56,13 +55,22 @@
             </div>
             <div class="symptoms">
                 <button type="button" onclick="selectSymptom(this, 'treatment1')" data-price="15000">和装プラン〈30分〉</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment2')"
-                    data-price="15000">洋装プランA〈60分〉</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment3')"
-                    data-price="15000">洋装プランB〈120分〉</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment4')"
-                    data-price="15000">洋装プランC〈30分〉</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment2')" data-price="15000">洋装プランA〈60分〉</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment3')" data-price="15000">洋装プランB〈120分〉</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment4')" data-price="15000">洋装プランC〈30分〉</button>
             </div>
+            
+            <div class="treatment-display" id="treatmentDisplay">
+                <div class="placeholder">
+                    上のボタンからプランを選択してください
+                </div>
+            </div>
+
+            <div class="display-info" id="displayInfo" style="display: none;">
+                <h3>選択情報</h3>
+                <p id="selectedInfo"></p>
+            </div>
+
             <div class="highlight-background">
                 <span class="highlight-text">ブライダルコース：オプション</span>
             </div>
@@ -81,13 +89,17 @@
                 <span class="highlight-text">◆シェービングコース◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment5')"
-                    data-price="15000">リラックスコース〈60分〉</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment6')"
-                    data-price="15000">ベーシックコース〈30分〉</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment7')"
-                    data-price="15000">スピードコース〈90分〉</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment5')" data-price="15000">リラックスコース〈60分〉</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment6')" data-price="15000">ベーシックコース〈30分〉</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment7')" data-price="15000">スピードコース〈90分〉</button>
             </div>
+
+            <div class="treatment-display" id="treatmentDisplay">
+                <div class="placeholder">
+                    上のボタンからプランを選択してください
+                </div>
+            </div>
+
             <div class="highlight-background">
                 <span class="highlight-text">シェービングコース：オプション</span>
             </div>
@@ -116,14 +128,20 @@
                 <span class="highlight-text">◆マッサージコース◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment8')"
-                    data-price="15000">リラックスマッサージ〈30分〉</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment9')"
-                    data-price="15000">ベーシックマッサージ〈30分〉</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment8')" data-price="15000">リラックスマッサージ〈30分〉</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment9')" data-price="15000">ベーシックマッサージ〈30分〉</button>
             </div>
+
+            <div class="treatment-display" id="treatmentDisplay">
+                <div class="placeholder">
+                    上のボタンからプランを選択してください
+                </div>
+            </div>
+
             <div class="highlight-background">
                 <span class="highlight-text">マッサージコース：オプション</span>
             </div>
+
             <div class="irradiations">
                 <button type="button" id="twelvethirradiations" onclick="selectirradiations(this)"
                     data-price="15000">眉カット〈30分〉</button>
@@ -406,6 +424,20 @@
         let menuTimes = MENU_CONFIG;
 
         document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.symptoms button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const calendarContainer = document.querySelector('.calendar-container');
+                    
+                    // 選択されたメニューがあればカレンダーを表示
+                    if (document.querySelectorAll('.symptoms button.active').length > 0) {
+                        calendarContainer.style.display = 'block';
+                    } else {
+                        // 選択が解除された場合、カレンダーを非表示
+                        calendarContainer.style.display = 'none';
+                    }
+                });
+            });
+
             liff.init({
                 liffId: LIFF_CONFIG.liffId
             }).then(() => {
@@ -498,6 +530,8 @@
             const name = document.getElementById('name').value;
             const visitCountText = visitCount ? `<span style="color:#13ca5e;"><strong>【ご来店回数】</strong></span><br>・${visitCount}` : '・来店回数が未選択です';
             const selectedMenuText = selectedMenu ? `<span style="color:#13ca5e;"><strong>【コース】</strong></span><br>・${selectedMenu}` : '・コースが未選択です';
+            const displayInfo = document.getElementById('displayInfo');
+            const selectedInfo = document.getElementById('selectedInfo');
 
             const selectedSymptomText = selectedSymptom.length > 0
                 ? `<span style="color:#13ca5e;"><strong>【メニュー】</strong></span><br>・${selectedSymptom.join('<br>')}`
@@ -515,47 +549,54 @@
             const totalAmountText = `<span style="color:#13ca5e;"><strong>【合計金額】</strong></span><br>・¥${menuPrice + optionsPrice}`;
             const selectedDateText = selectedFullDate ? `<span style="color:#13ca5e;"><strong>【希望日時】</strong></span><br>・${selectedFullDate}` : '・日時が未選択です';
 
+            if (selectedSymptom && selectedSymptom.length > 0) {
+                selectedInfo.textContent = `選択中: ${selectedSymptom[0]} (¥${menuPrice.toLocaleString()})`;
+                displayInfo.style.display = 'block';
+            } else {
+                displayInfo.style.display = 'none';
+            }
+            
             // 修正ボタン付きのHTMLを作成
             document.getElementById('displayInfo').innerHTML = `
-        <div class="info-row">
-            <p><span style="color:#13ca5e;"><strong>【お名前】</strong></span><br>・${name}</p>
-            <button class="edit-button" onclick="scrollToElement('name')">修正する</button>
-        </div>
-        <hr>
-        <div class="info-row">
-            <p>${visitCountText}</p>
-            <button class="edit-button" onclick="scrollToElement('firstVisit')">修正する</button>
-        </div>
-        <hr>
-        <div class="info-row">
-            <p>${selectedMenuText}</p>
-            <button class="edit-button" onclick="scrollToElement('course')">修正する</button>
-        </div>
-        <hr>
-        <div class="info-row">
-            <p>${selectedSymptomText}</p>
-            <button class="edit-button" onclick="scrollToElement('male'); scrollToElement('female'); scrollToElement('whitening');">修正する</button>
-        </div>
-        <hr>
-        <div class="info-row">
-            <p>${irradiationsText}</p>
-            <button class="edit-button" onclick="scrollToElement('firstirradiations')">修正する</button>
-        </div>
-        <hr>
-        <div class="info-row">
-            <p>${totalTimeText}</p>
-        </div>
-        <hr>
-        <div class="info-row">
-            <p>${selectedDateText}</p>
-            <button class="edit-button" onclick="scrollToElement('calendar1')">修正する</button>
-        </div>
-        <hr>
-        <div class="info-row">
-            <p>${totalAmountText}</p>
-        </div>
-        <hr>
-    `;
+                <div class="info-row">
+                    <p><span style="color:#13ca5e;"><strong>【お名前】</strong></span><br>・${name}</p>
+                    <button class="edit-button" onclick="scrollToElement('name')">修正する</button>
+                </div>
+                <hr>
+                <div class="info-row">
+                    <p>${visitCountText}</p>
+                    <button class="edit-button" onclick="scrollToElement('firstVisit')">修正する</button>
+                </div>
+                <hr>
+                <div class="info-row">
+                    <p>${selectedMenuText}</p>
+                    <button class="edit-button" onclick="scrollToElement('course')">修正する</button>
+                </div>
+                <hr>
+                <div class="info-row">
+                    <p>${selectedSymptomText}</p>
+                    <button class="edit-button" onclick="scrollToElement('male'); scrollToElement('female'); scrollToElement('whitening');">修正する</button>
+                </div>
+                <hr>
+                <div class="info-row">
+                    <p>${irradiationsText}</p>
+                    <button class="edit-button" onclick="scrollToElement('firstirradiations')">修正する</button>
+                </div>
+                <hr>
+                <div class="info-row">
+                    <p>${totalTimeText}</p>
+                </div>
+                <hr>
+                <div class="info-row">
+                    <p>${selectedDateText}</p>
+                    <button class="edit-button" onclick="scrollToElement('calendar1')">修正する</button>
+                </div>
+                <hr>
+                <div class="info-row">
+                    <p>${totalAmountText}</p>
+                </div>
+                <hr>
+            `;
         }
 
         // スクロール関数
@@ -612,15 +653,18 @@
             // 選択された日時をリセット
             selectedFullDate = '';
 
-            // ボタンの選択状態を切り替える
-            button.classList.toggle('active');
+            // 全てのボタンから selected クラスを削除
+            document.querySelectorAll('.symptoms button').forEach(btn => {
+                btn.classList.remove('selected');
+                btn.classList.remove('active');
+            });
+            
+            // クリックされたボタンに selected クラスを追加
+            button.classList.add('selected');
+            button.classList.add('active');
 
-            // ローカルストレージに保存する配列を取得
-            let selectedSymptoms = JSON.parse(localStorage.getItem('selectedSymptoms') || '[]');
-
-            // 選択した症状をローカルストレージに保存（1つだけ保持）
-            selectedSymptoms = [treatmentId];
-            localStorage.setItem('selectedSymptoms', JSON.stringify(selectedSymptoms));
+            // メモリストレージに保存（1つだけ保持）
+            // memoryStorage.selectedSymptoms = [treatmentId]; // この行は削除またはコメントアウト
 
             // 選択されたオプションを取得
             const updatedSelectedButtons = document.querySelectorAll('.symptoms button.active');
@@ -632,14 +676,14 @@
                 selectedSymptom = null;
                 menuPrice = 0;
                 treatmentText.style.display = 'none';
+                
+                // treatmentDisplayも非表示にする
+                const display = document.getElementById('treatmentDisplay');
+                if (display) {
+                    display.classList.remove('active');
+                }
                 return;
             } else {
-                // 1つだけ選択状態にする
-                if (updatedSelectedButtons.length > 1) {
-                    updatedSelectedButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                }
-
                 // 選択されたメニューの時間を取得して保存
                 const selectedMenu = button.textContent;
                 selectedMenuTime = menuTimes[selectedMenu] || 0;
@@ -647,29 +691,29 @@
                 menuPrice = parseInt(button.getAttribute('data-price'), 10) || 0;
             }
 
-            console.log('選択されたメニューの時間:', selectedMenuTime);
-
-            // カレンダーを更新するために取得する日付を渡す
-            fetchAvailability(currentDate);
-
-            // 設定からトリートメント情報を取得
-            const treatmentInfo = TREATMENT_INFO[treatmentId];
-            if (treatmentInfo) {
-                treatmentText.innerHTML = treatmentInfo.text;
-            } else {
-                treatmentText.innerHTML = '';
+            // カレンダーを更新（fetchAvailability関数が定義されている場合）
+            if (typeof fetchAvailability === 'function') {
+                fetchAvailability(currentDate);
             }
-
-            // `treatment-text` を選択されたボタンの直後に移動
-            button.parentNode.insertBefore(treatmentText, button.nextSibling);
-
-            // トリートメントテキストを表示
-            treatmentText.style.display = 'block';
 
             // 選択されたメニューの名前と価格を取得
             const symptomName = button.textContent;
             selectedSymptom = [symptomName];
             menuPrice = parseInt(button.getAttribute('data-price'), 10) || 0;
+
+            // TREATMENT_INFOオブジェクトを使用してトリートメント情報を表示
+            const treatment = TREATMENT_INFO[treatmentId];
+            const display = document.getElementById('treatmentDisplay');
+            
+            if (treatment && display) {
+                display.innerHTML = `
+                    <div class="treatment-title">${symptomName}</div>
+                    <div class="treatment-info">${treatment.text}</div>
+                `;
+                
+                display.classList.add('active');
+                display.style.display = 'block';
+            }
 
             // 表示を更新
             updateDisplayInfo();
@@ -819,6 +863,12 @@
                     menuButton.classList.add('selected');
                 }
             });
+
+            // 初期状態でカレンダーを非表示にする
+            const calendarContainer = document.querySelector('.calendar-container');
+            if (calendarContainer) {
+                calendarContainer.style.display = 'none';
+            }
         });
 
         function selectDate(cell) {
